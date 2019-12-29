@@ -1,0 +1,19 @@
+.home {
+    margin-top: var(--navBar-height);
+}
+
+.home .homeTitle {
+    text-align: center;
+    padding: 10px;
+    font-size: 40px;
+}
+
+.home .searchForm {
+    text-align: center;
+}
+
+.home .searchBar {
+    width: 40%;
+    font-size: 20px;
+    padding: 2px 10px;
+}
