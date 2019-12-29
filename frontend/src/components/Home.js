@@ -5,7 +5,8 @@ import axios from 'axios';
 class Home extends React.Component {
     state = {
         searchValue: '',
-        githubUser: null
+        githubUser: null,
+        gitlabUser: null
     };
 
     fetchUsers = async () => {
@@ -13,12 +14,12 @@ class Home extends React.Component {
             const response = await axios.get(
                 `http://localhost:5000/api/search/${this.state.searchValue}`
             );
-            console.log(response);
             this.setState({
-                githubUser: response.data.searchResults.github_user
+                githubUser: response.data.searchResults.github_user,
+                gitlabUser: response.data.searchResults.gitlab_user
             });
         } catch {
-            this.setState({ githubUser: null });
+            this.setState({ githubUser: null, gitlabUser: null });
         }
     };
 
@@ -55,6 +56,7 @@ class Home extends React.Component {
                         <hr />
                         {this.state.githubUser && (
                             <div>
+                                <div>Github</div>
                                 <div>
                                     Username: {this.state.githubUser.login}
                                 </div>
@@ -65,6 +67,17 @@ class Home extends React.Component {
                                 <div>
                                     Date Created:{' '}
                                     {this.state.githubUser.created_at}
+                                </div>
+                            </div>
+                        )}
+                        <hr />
+                        {this.state.gitlabUser && (
+                            <div>
+                                <div>Gitlab</div>
+                                <div>id: {this.state.gitlabUser.id}</div>
+                                <div>name: {this.state.gitlabUser.name}</div>
+                                <div>
+                                    username: {this.state.gitlabUser.username}
                                 </div>
                             </div>
                         )}

@@ -9,15 +9,32 @@ router.get('/:query', async (req, res, next) => {
 
     let output = {};
 
+    // GITHUB
     let response;
     try {
-        response = await axios.get('https://api.github.com/users/' + query);
+        response = await axios.get(`https://api.github.com/users/${query}`);
         if (response.data) {
             output['github_user'] = response.data;
         }
-        console.log(response);
     } catch {
-        // output['github_user'] = {};
+        output['github_user'] = {};
+    }
+
+    // GITLAB
+    try {
+        response = await axios.get(
+            `https://gitlab.com/api/v4/users?username=${query}`
+        );
+        const user_id = response.data[0].id;
+
+        if (user_id) {
+            response = await axios.get(
+                `https://gitlab.com/api/v4/users/${user_id}`
+            );
+            output['gitlab_user'] = response.data;
+        }
+    } catch {
+        output['gitlab_user'] = {};
     }
 
     res.json({ searchResults: output, timestamp: Date.now() });
