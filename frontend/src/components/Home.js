@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import axios from 'axios';
+import SearchCard from './SearchCard';
 
 class Home extends React.Component {
     state = {
@@ -55,31 +56,26 @@ class Home extends React.Component {
                     <div className='searchResults'>
                         <hr />
                         {this.state.githubUser && (
-                            <div>
-                                <div>Github</div>
-                                <div>
-                                    Username: {this.state.githubUser.login}
-                                </div>
-                                <div>Bio: {this.state.githubUser.bio}</div>
-                                <div>
-                                    Location: {this.state.githubUser.login}
-                                </div>
-                                <div>
-                                    Date Created:{' '}
-                                    {this.state.githubUser.created_at}
-                                </div>
-                            </div>
+                            <SearchCard
+                                source='Github'
+                                details={{
+                                    Username: this.state.githubUser.login,
+                                    Bio: this.state.githubUser.bio,
+                                    Location: this.state.githubUser.location,
+                                    DateCeated: this.state.githubUser.created_at
+                                }}
+                            />
                         )}
                         <hr />
                         {this.state.gitlabUser && (
-                            <div>
-                                <div>Gitlab</div>
-                                <div>id: {this.state.gitlabUser.id}</div>
-                                <div>name: {this.state.gitlabUser.name}</div>
-                                <div>
-                                    username: {this.state.gitlabUser.username}
-                                </div>
-                            </div>
+                            <SearchCard
+                                source='Gitlab'
+                                details={{
+                                    Id: this.state.gitlabUser.id,
+                                    Name: this.state.gitlabUser.name,
+                                    Username: this.state.gitlabUser.username
+                                }}
+                            />
                         )}
                     </div>
                 </div>
