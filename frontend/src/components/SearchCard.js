@@ -11,14 +11,6 @@ import './SearchCard.css';
 
 class SearchCard extends React.Component {
     render() {
-        // const details = Object.keys(this.props.details).map((key, index) => {
-        //     return (
-        //         <div className='col-lg-6' key={index}>
-        //             {key}: {this.props.details[key]}
-        //         </div>
-        //     );
-        // });
-
         let cardClass;
         let sourceIcon;
         switch (this.props.source) {
@@ -68,10 +60,12 @@ class SearchCard extends React.Component {
                         </div>
                     </div>
                     {this.props.user.bio && (
-                        <div>Bio: {this.props.user.bio}</div>
+                        <div>
+                            <b>Bio:</b> {this.props.user.bio}
+                        </div>
                     )}
                     <div className='numRepositories'>
-                        {this.props.user.public_repos} Repos
+                        <b>{this.props.user.public_repos} Projects</b>
                     </div>
                 </div>
 

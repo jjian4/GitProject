@@ -49,6 +49,13 @@ router.get('/:query', async (req, res, next) => {
                 created_at,
                 bio
             } = response.data;
+
+            response = await axios.get(
+                `https://gitlab.com/api/v4/users/${user_id}/projects`
+            );
+
+            const numRepos = response.data.length;
+
             output['gitlab_user'] = {
                 login: username,
                 avatar_url,
@@ -56,7 +63,7 @@ router.get('/:query', async (req, res, next) => {
                 name,
                 bio,
                 created_at,
-                public_repos: 'unknown #'
+                public_repos: numRepos
             };
         }
     } catch {
