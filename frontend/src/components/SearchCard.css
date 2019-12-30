@@ -1,0 +1,49 @@
+.searchCard {
+    padding: 10px 20px;
+    max-width: 550px;
+    margin: 15px auto;
+}
+
+.grayCard {
+    background-color: lightgray;
+}
+
+.orangeCard {
+    background-color: lightsalmon;
+}
+
+.blueCard {
+    background-color: lightblue;
+}
+
+.searchCard .avatar {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    border: 1px solid white;
+    border-radius: 100%;
+}
+
+.searchCard .username {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.searchCard .source {
+    float: right;
+    font-size: 20px;
+}
+
+.searchCard .cardButtons {
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.searchCard .cardButtons .cardButton {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5%;
+    min-width: 25%;
+    padding: 3px 0;
+}

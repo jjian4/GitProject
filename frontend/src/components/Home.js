@@ -54,27 +54,16 @@ class Home extends React.Component {
                     </form>
 
                     <div className='searchResults'>
-                        <hr />
                         {this.state.githubUser && (
                             <SearchCard
-                                source='Github'
-                                details={{
-                                    Username: this.state.githubUser.login,
-                                    Bio: this.state.githubUser.bio,
-                                    Location: this.state.githubUser.location,
-                                    DateCeated: this.state.githubUser.created_at
-                                }}
+                                source='github'
+                                user={this.state.githubUser}
                             />
                         )}
-                        <hr />
                         {this.state.gitlabUser && (
                             <SearchCard
-                                source='Gitlab'
-                                details={{
-                                    Id: this.state.gitlabUser.id,
-                                    Name: this.state.gitlabUser.name,
-                                    Username: this.state.gitlabUser.username
-                                }}
+                                source='gitlab'
+                                user={this.state.gitlabUser}
                             />
                         )}
                     </div>

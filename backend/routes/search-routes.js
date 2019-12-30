@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const HttpError = require('../models/http-error');
+const _ = require('lodash');
 
 const router = express.Router();
 
@@ -14,10 +15,18 @@ router.get('/:query', async (req, res, next) => {
     try {
         response = await axios.get(`https://api.github.com/users/${query}`);
         if (response.data) {
-            output['github_user'] = response.data;
+            // output['github_user'] = response.data;
+            output['github_user'] = _.pick(response.data, [
+                'login',
+                'avatar_url',
+                'name',
+                'bio',
+                'created_at',
+                'public_repos'
+            ]);
         }
     } catch {
-        output['github_user'] = {};
+        // output['github_user'] = {};
     }
 
     // GITLAB
@@ -31,10 +40,24 @@ router.get('/:query', async (req, res, next) => {
             response = await axios.get(
                 `https://gitlab.com/api/v4/users/${user_id}`
             );
-            output['gitlab_user'] = response.data;
+            const {
+                name,
+                username,
+                avatar_url,
+                created_at,
+                bio
+            } = response.data;
+            output['gitlab_user'] = {
+                login: username,
+                avatar_url,
+                name,
+                bio,
+                created_at,
+                public_repos: 'unknown #'
+            };
         }
     } catch {
-        output['gitlab_user'] = {};
+        // output['gitlab_user'] = {};
     }
 
     res.json({ searchResults: output, timestamp: Date.now() });
