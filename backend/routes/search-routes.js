@@ -19,6 +19,7 @@ router.get('/:query', async (req, res, next) => {
             output['github_user'] = _.pick(response.data, [
                 'login',
                 'avatar_url',
+                'html_url',
                 'name',
                 'bio',
                 'created_at',
@@ -44,12 +45,14 @@ router.get('/:query', async (req, res, next) => {
                 name,
                 username,
                 avatar_url,
+                web_url,
                 created_at,
                 bio
             } = response.data;
             output['gitlab_user'] = {
                 login: username,
                 avatar_url,
+                html_url: web_url,
                 name,
                 bio,
                 created_at,

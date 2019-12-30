@@ -4,7 +4,9 @@ import {
     faGitlab,
     faBitbucket
 } from '@fortawesome/free-brands-svg-icons';
+import { faUser, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
 import './SearchCard.css';
 
 class SearchCard extends React.Component {
@@ -44,16 +46,50 @@ class SearchCard extends React.Component {
                     src={this.props.user.avatar_url}
                     alt='avatar'
                 />
-                <span className='username'>{this.props.user.login}</span>
+                <span className='name'>
+                    {this.props.user.name || this.props.user.login}
+                </span>
                 <span className='source'>{sourceIcon}</span>
-                <div>Name: {this.props.user.name}</div>
-                <div>Created at: {this.props.user.created_at}</div>
-                {this.props.user.bio && <div>Bio: {this.props.user.bio}</div>}
-                <div>{this.props.user.public_repos} Public Repos</div>
+                <div className='cardDetails'>
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <span className='cardDetailsIcon'>
+                                <FontAwesomeIcon icon={faUser} />
+                            </span>
+                            {this.props.user.login}
+                        </div>
+                        <div className='col-sm-6'>
+                            <span className='cardDetailsIcon'>
+                                <FontAwesomeIcon icon={faCalendarAlt} />
+                            </span>
+                            {moment(this.props.user.created_at).format(
+                                'MMM DD, YYYY'
+                            )}
+                        </div>
+                    </div>
+                    {this.props.user.bio && (
+                        <div>Bio: {this.props.user.bio}</div>
+                    )}
+                    <div className='numRepositories'>
+                        {this.props.user.public_repos} Repos
+                    </div>
+                </div>
+
                 <div className='cardButtons'>
-                    <button className='cardButton'>Details</button>
-                    <button className='cardButton'>Visit</button>
-                    <button className='cardButton'>Follow</button>
+                    <a className='cardButton' href=':;javascript'>
+                        Details
+                    </a>
+                    <a
+                        className='cardButton'
+                        href={this.props.user.html_url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                    >
+                        Visit
+                    </a>
+                    <a className='cardButton' href=':;javascript'>
+                        Follow
+                    </a>
                 </div>
             </div>
         );
