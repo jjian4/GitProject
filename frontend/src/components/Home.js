@@ -5,9 +5,11 @@ import SearchCard from './SearchCard';
 
 class Home extends React.Component {
     state = {
+        prevValue: '',
         searchValue: '',
         githubUser: null,
-        gitlabUser: null
+        gitlabUser: null,
+        bitbucketUser: null
     };
 
     fetchUsers = async () => {
@@ -17,7 +19,8 @@ class Home extends React.Component {
             );
             this.setState({
                 githubUser: response.data.searchResults.github_user,
-                gitlabUser: response.data.searchResults.gitlab_user
+                gitlabUser: response.data.searchResults.gitlab_user,
+                bitbucketUser: response.data.searchResults.bitbucket_user
             });
         } catch {
             this.setState({ githubUser: null, gitlabUser: null });
@@ -26,10 +29,18 @@ class Home extends React.Component {
 
     handleSearchSubmit = event => {
         event.preventDefault();
+        // Avoid unecessary requests
+        if (
+            this.state.prevValue === this.state.searchValue ||
+            this.state.searchValue === ''
+        ) {
+            return;
+        }
+        this.setState({ prevValue: this.state.searchValue });
         this.fetchUsers();
     };
 
-    handleSearch = event => {
+    handleSearchEdit = event => {
         this.setState({
             searchValue: event.target.value
         });
@@ -49,7 +60,7 @@ class Home extends React.Component {
                             type='text'
                             placeholder='Search for user'
                             value={this.state.searchValue}
-                            onChange={this.handleSearch}
+                            onChange={this.handleSearchEdit}
                         />
                     </form>
 
@@ -64,6 +75,12 @@ class Home extends React.Component {
                             <SearchCard
                                 source='gitlab'
                                 user={this.state.gitlabUser}
+                            />
+                        )}
+                        {this.state.bitbucketUser && (
+                            <SearchCard
+                                source='bitbucket'
+                                user={this.state.bitbucketUser}
                             />
                         )}
                     </div>

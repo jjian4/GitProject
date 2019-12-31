@@ -70,6 +70,34 @@ router.get('/:query', async (req, res, next) => {
         // output['gitlab_user'] = {};
     }
 
+    // BITBUCKET
+    let repoUrl;
+    try {
+        response = await axios.get(
+            `https://api.bitbucket.org/2.0/users/${query}`
+        );
+        if (response.data) {
+            const { display_name, links, created_on, nickname } = response.data;
+
+            repoUrl = links.repositories.href;
+
+            output['bitbucket_user'] = {
+                login: nickname,
+                avatar_url: links.avatar.href,
+                html_url: links.html,
+                name: display_name,
+                created_at: created_on
+            };
+        }
+    } catch {}
+    try {
+        response = await axios.get(repoUrl);
+        numRepos = response.data.size;
+        output['bitbucket_user']['public_repos'] = numRepos;
+    } catch {
+        output['bitbucket_user']['public_repos'] = 0;
+    }
+
     res.json({ searchResults: output, timestamp: Date.now() });
 });
 

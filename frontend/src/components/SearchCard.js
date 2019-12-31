@@ -16,15 +16,27 @@ class SearchCard extends React.Component {
         switch (this.props.source) {
             case 'github':
                 cardClass = 'grayCard';
-                sourceIcon = <FontAwesomeIcon icon={faGithub} />;
+                sourceIcon = (
+                    <span className='source' title='Github'>
+                        <FontAwesomeIcon icon={faGithub} />
+                    </span>
+                );
                 break;
             case 'gitlab':
                 cardClass = 'orangeCard';
-                sourceIcon = <FontAwesomeIcon icon={faGitlab} />;
+                sourceIcon = (
+                    <span className='source' title='Gitlab'>
+                        <FontAwesomeIcon icon={faGitlab} />
+                    </span>
+                );
                 break;
             case 'bitbucket':
                 cardClass = 'blueCard';
-                sourceIcon = <FontAwesomeIcon icon={faBitbucket} />;
+                sourceIcon = (
+                    <span className='source' title='Bitbucket'>
+                        <FontAwesomeIcon icon={faBitbucket} />
+                    </span>
+                );
                 break;
             default:
                 break;
@@ -41,7 +53,7 @@ class SearchCard extends React.Component {
                 <span className='name'>
                     {this.props.user.name || this.props.user.login}
                 </span>
-                <span className='source'>{sourceIcon}</span>
+                {sourceIcon}
                 <div className='cardDetails'>
                     <div className='row'>
                         <div className='col-sm-6'>
@@ -65,7 +77,12 @@ class SearchCard extends React.Component {
                         </div>
                     )}
                     <div className='numRepositories'>
-                        <b>{this.props.user.public_repos} Projects</b>
+                        <b>
+                            {this.props.user.public_repos}{' '}
+                            {this.props.user.public_repos === 1
+                                ? 'Project'
+                                : 'Projects'}
+                        </b>
                     </div>
                 </div>
 
