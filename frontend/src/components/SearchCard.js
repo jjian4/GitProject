@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     faGithub,
     faGitlab,
@@ -87,9 +88,12 @@ class SearchCard extends React.Component {
                 </div>
 
                 <div className='cardButtons'>
-                    <a className='cardButton' href=':;javascript'>
+                    <Link
+                        className='cardButton'
+                        to={`/${this.props.source}/${this.props.user.login}`}
+                    >
                         Details
-                    </a>
+                    </Link>
                     <a
                         className='cardButton'
                         href={this.props.user.html_url}

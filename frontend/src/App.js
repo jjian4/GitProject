@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
+import Details from './components/Details';
 
 function App() {
     return (
@@ -36,7 +37,9 @@ function App() {
             {/* Renders Route where path matches current url */}
             <Switch>
                 <Route exact path='/' component={Home} />
-                {/* <Route component={Home} /> */}
+                <Route path='/github/:username' component={Details} />
+
+                <Route component={Home} />
             </Switch>
         </Router>
     );
