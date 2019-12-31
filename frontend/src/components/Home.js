@@ -2,6 +2,8 @@ import React from 'react';
 import './Home.css';
 import axios from 'axios';
 import SearchCard from './SearchCard';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Home extends React.Component {
     state = {
@@ -9,10 +11,13 @@ class Home extends React.Component {
         searchValue: '',
         githubUser: null,
         gitlabUser: null,
-        bitbucketUser: null
+        bitbucketUser: null,
+        searchPending: false
     };
 
     fetchUsers = async () => {
+        this.setState({ searchPending: true });
+
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/search/${this.state.searchValue}`
@@ -20,7 +25,8 @@ class Home extends React.Component {
             this.setState({
                 githubUser: response.data.searchResults.github_user,
                 gitlabUser: response.data.searchResults.gitlab_user,
-                bitbucketUser: response.data.searchResults.bitbucket_user
+                bitbucketUser: response.data.searchResults.bitbucket_user,
+                searchPending: false
             });
         } catch {
             this.setState({ githubUser: null, gitlabUser: null });
@@ -62,7 +68,7 @@ class Home extends React.Component {
         return (
             <div className='home'>
                 <div className='container'>
-                    <div className='homeTitle'>Website Title</div>
+                    <div className='homeTitle'>GitTogether</div>
                     <form
                         className='searchForm'
                         onSubmit={this.handleSearchSubmit}
@@ -76,26 +82,36 @@ class Home extends React.Component {
                         />
                     </form>
 
-                    <div className='searchResults'>
-                        {this.state.githubUser && (
-                            <SearchCard
-                                source='github'
-                                user={this.state.githubUser}
-                            />
-                        )}
-                        {this.state.gitlabUser && (
-                            <SearchCard
-                                source='gitlab'
-                                user={this.state.gitlabUser}
-                            />
-                        )}
-                        {this.state.bitbucketUser && (
-                            <SearchCard
-                                source='bitbucket'
-                                user={this.state.bitbucketUser}
-                            />
-                        )}
-                    </div>
+                    {this.state.searchPending && (
+                        <div className='spinnerWrapper'>
+                            <span className='searchSpinner'>
+                                <FontAwesomeIcon icon={faSpinner} />
+                            </span>
+                        </div>
+                    )}
+
+                    {!this.state.searchPending && (
+                        <div>
+                            {this.state.githubUser && (
+                                <SearchCard
+                                    source='github'
+                                    user={this.state.githubUser}
+                                />
+                            )}
+                            {this.state.gitlabUser && (
+                                <SearchCard
+                                    source='gitlab'
+                                    user={this.state.gitlabUser}
+                                />
+                            )}
+                            {this.state.bitbucketUser && (
+                                <SearchCard
+                                    source='bitbucket'
+                                    user={this.state.bitbucketUser}
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         );

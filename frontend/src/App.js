@@ -15,7 +15,7 @@ function App() {
             <div className='navBar'>
                 <div className='container navBarContainer'>
                     <div className='navItem logo'>
-                        <Link to='/'>WEBSITE TITLE</Link>
+                        <Link to='/'>GitTogether</Link>
                     </div>
                     <nav>
                         <ul className='navBarRight'>

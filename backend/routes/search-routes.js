@@ -18,6 +18,7 @@ router.get('/:query', async (req, res, next) => {
             // output['github_user'] = response.data;
             output['github_user'] = _.pick(response.data, [
                 'login',
+                'id',
                 'avatar_url',
                 'html_url',
                 'name',
@@ -42,6 +43,7 @@ router.get('/:query', async (req, res, next) => {
                 `https://gitlab.com/api/v4/users/${user_id}`
             );
             const {
+                id,
                 name,
                 username,
                 avatar_url,
@@ -57,6 +59,7 @@ router.get('/:query', async (req, res, next) => {
             const numRepos = response.data.length;
 
             output['gitlab_user'] = {
+                id,
                 login: username,
                 avatar_url,
                 html_url: web_url,
@@ -77,11 +80,18 @@ router.get('/:query', async (req, res, next) => {
             `https://api.bitbucket.org/2.0/users/${query}`
         );
         if (response.data) {
-            const { display_name, links, created_on, nickname } = response.data;
+            const {
+                display_name,
+                uuid,
+                links,
+                created_on,
+                nickname
+            } = response.data;
 
             repoUrl = links.repositories.href;
 
             output['bitbucket_user'] = {
+                id: uuid,
                 login: nickname,
                 avatar_url: links.avatar.href,
                 html_url: links.html,
