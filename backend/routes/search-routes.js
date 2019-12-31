@@ -90,12 +90,14 @@ router.get('/:query', async (req, res, next) => {
             };
         }
     } catch {}
-    try {
-        response = await axios.get(repoUrl);
-        numRepos = response.data.size;
-        output['bitbucket_user']['public_repos'] = numRepos;
-    } catch {
-        output['bitbucket_user']['public_repos'] = 0;
+    if (output['bitbucket_user']) {
+        try {
+            response = await axios.get(repoUrl);
+            numRepos = response.data.size;
+            output['bitbucket_user']['public_repos'] = numRepos;
+        } catch {
+            output['bitbucket_user']['public_repos'] = 0;
+        }
     }
 
     res.json({ searchResults: output, timestamp: Date.now() });

@@ -41,6 +41,18 @@ class Home extends React.Component {
     };
 
     handleSearchEdit = event => {
+        // Don't allow spaces and other risky chars
+        const newChar = event.target.value.slice(-1);
+        if (
+            newChar === ' ' ||
+            newChar === '/' ||
+            newChar === ' \\' ||
+            newChar === '%' ||
+            newChar === '?'
+        ) {
+            return;
+        }
+
         this.setState({
             searchValue: event.target.value
         });
