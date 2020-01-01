@@ -9,9 +9,7 @@ class Home extends React.Component {
     state = {
         prevValue: '',
         searchValue: '',
-        githubUser: null,
-        gitlabUser: null,
-        bitbucketUser: null,
+        searchResults: null,
         searchPending: false
     };
 
@@ -23,13 +21,11 @@ class Home extends React.Component {
                 `http://localhost:5000/api/search/${this.state.searchValue}`
             );
             this.setState({
-                githubUser: response.data.searchResults.github_user,
-                gitlabUser: response.data.searchResults.gitlab_user,
-                bitbucketUser: response.data.searchResults.bitbucket_user,
+                searchResults: response.data.searchResults,
                 searchPending: false
             });
         } catch {
-            this.setState({ githubUser: null, gitlabUser: null });
+            this.setState({ searchResults: null, searchPending: false });
         }
     };
 
@@ -65,6 +61,13 @@ class Home extends React.Component {
     };
 
     render() {
+        let cards;
+        if (this.state.searchResults) {
+            cards = this.state.searchResults.map((item, index) => {
+                return <SearchCard key={index} user={item} />;
+            });
+        }
+
         return (
             <div className='home'>
                 <div className='container'>
@@ -90,28 +93,7 @@ class Home extends React.Component {
                         </div>
                     )}
 
-                    {!this.state.searchPending && (
-                        <div>
-                            {this.state.githubUser && (
-                                <SearchCard
-                                    source='github'
-                                    user={this.state.githubUser}
-                                />
-                            )}
-                            {this.state.gitlabUser && (
-                                <SearchCard
-                                    source='gitlab'
-                                    user={this.state.gitlabUser}
-                                />
-                            )}
-                            {this.state.bitbucketUser && (
-                                <SearchCard
-                                    source='bitbucket'
-                                    user={this.state.bitbucketUser}
-                                />
-                            )}
-                        </div>
-                    )}
+                    {!this.state.searchPending && <div>{cards}</div>}
                 </div>
             </div>
         );

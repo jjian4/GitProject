@@ -14,7 +14,7 @@ class SearchCard extends React.Component {
     render() {
         let cardClass;
         let sourceIcon;
-        switch (this.props.source) {
+        switch (this.props.user.source) {
             case 'github':
                 cardClass = 'grayCard';
                 sourceIcon = (
@@ -90,7 +90,7 @@ class SearchCard extends React.Component {
                 <div className='cardButtons'>
                     <Link
                         className='cardButton'
-                        to={`/${this.props.source}/${this.props.user.login}`}
+                        to={`/details/${this.props.user.source}/${this.props.user.login}`}
                     >
                         Details
                     </Link>

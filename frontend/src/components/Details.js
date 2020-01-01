@@ -5,8 +5,8 @@ import './Details.css';
 
 class Details extends React.Component {
     constants = {
-        source: this.props.location.pathname.split('/')[1],
-        username: this.props.location.pathname.split('/')[2]
+        source: this.props.location.pathname.split('/')[2],
+        username: this.props.location.pathname.split('/')[3]
     };
 
     state = {
@@ -21,7 +21,7 @@ class Details extends React.Component {
     fetchUserDetails = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:5000/api/details/${this.constants.username}` //TODO: implement on backend
+                `http://localhost:5000/api/details/${this.constants.source}/${this.constants.username}` //TODO: implement on backend
             );
             this.setState({
                 userInfo: response.data
@@ -44,8 +44,8 @@ class Details extends React.Component {
         return (
             <div className='details'>
                 <div className='container'>
-                    <div>{this.state.source}</div>
-                    <div>{this.state.username}</div>
+                    <div>{this.constants.source}</div>
+                    <div>{this.constants.username}</div>
                 </div>
             </div>
         );

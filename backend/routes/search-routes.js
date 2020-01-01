@@ -5,18 +5,16 @@ const _ = require('lodash');
 
 const router = express.Router();
 
-router.get('/:query', async (req, res, next) => {
+router.get('/github/:query', async (req, res, next) => {
     const query = req.params.query;
-
-    let output = {};
-
-    // GITHUB
-    let response;
+    let output;
     try {
-        response = await axios.get(`https://api.github.com/users/${query}`);
+        const response = await axios.get(
+            `https://api.github.com/users/${query}`
+        );
         if (response.data) {
             // output['github_user'] = response.data;
-            output['github_user'] = _.pick(response.data, [
+            output = _.pick(response.data, [
                 'login',
                 'id',
                 'avatar_url',
@@ -26,14 +24,18 @@ router.get('/:query', async (req, res, next) => {
                 'created_at',
                 'public_repos'
             ]);
+            output['source'] = 'github';
         }
-    } catch {
-        // output['github_user'] = {};
-    }
+    } catch {}
 
-    // GITLAB
+    res.json({ user: output, timestamp: Date.now() });
+});
+
+router.get('/gitlab/:query', async (req, res, next) => {
+    const query = req.params.query;
+    let output;
     try {
-        response = await axios.get(
+        let response = await axios.get(
             `https://gitlab.com/api/v4/users?username=${query}`
         );
         const user_id = response.data[0].id;
@@ -58,7 +60,8 @@ router.get('/:query', async (req, res, next) => {
 
             const numRepos = response.data.length;
 
-            output['gitlab_user'] = {
+            output = {
+                source: 'gitlab',
                 id,
                 login: username,
                 avatar_url,
@@ -73,10 +76,15 @@ router.get('/:query', async (req, res, next) => {
         // output['gitlab_user'] = {};
     }
 
-    // BITBUCKET
+    res.json({ user: output, timestamp: Date.now() });
+});
+
+router.get('/bitbucket/:query', async (req, res, next) => {
+    const query = req.params.query;
+    let output;
     let repoUrl;
     try {
-        response = await axios.get(
+        let response = await axios.get(
             `https://api.bitbucket.org/2.0/users/${query}`
         );
         if (response.data) {
@@ -90,7 +98,8 @@ router.get('/:query', async (req, res, next) => {
 
             repoUrl = links.repositories.href;
 
-            output['bitbucket_user'] = {
+            output = {
+                source: 'bitbucket',
                 id: uuid,
                 login: nickname,
                 avatar_url: links.avatar.href,
@@ -100,15 +109,54 @@ router.get('/:query', async (req, res, next) => {
             };
         }
     } catch {}
-    if (output['bitbucket_user']) {
+    if (output) {
         try {
             response = await axios.get(repoUrl);
             numRepos = response.data.size;
-            output['bitbucket_user']['public_repos'] = numRepos;
+            output['public_repos'] = numRepos;
         } catch {
-            output['bitbucket_user']['public_repos'] = 0;
+            output['public_repos'] = 0;
         }
     }
+
+    res.json({ user: output, timestamp: Date.now() });
+});
+
+router.get('/:query', async (req, res, next) => {
+    const query = req.params.query;
+
+    let output = [];
+
+    // GITHUB
+    let response;
+    try {
+        response = await axios.get(
+            `http://localhost:5000/api/search/github/${query}`
+        );
+        if (response.data.user) {
+            output.push(response.data.user);
+        }
+    } catch {}
+
+    // GITLAB
+    try {
+        response = await axios.get(
+            `http://localhost:5000/api/search/gitlab/${query}`
+        );
+        if (response.data.user) {
+            output.push(response.data.user);
+        }
+    } catch {}
+
+    // BITBUCKET
+    try {
+        response = await axios.get(
+            `http://localhost:5000/api/search/bitbucket/${query}`
+        );
+        if (response.data.user) {
+            output.push(response.data.user);
+        }
+    } catch {}
 
     res.json({ searchResults: output, timestamp: Date.now() });
 });

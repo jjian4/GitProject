@@ -37,7 +37,7 @@ function App() {
             {/* Renders Route where path matches current url */}
             <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/github/:username' component={Details} />
+                <Route path='/details/github/:username' component={Details} />
 
                 <Route component={Home} />
             </Switch>
