@@ -26,9 +26,10 @@ router.get('/github/:query', async (req, res, next) => {
             ]);
             output['source'] = 'github';
         }
-    } catch {}
-
-    res.json({ user: output, timestamp: Date.now() });
+        res.json({ user: output, timestamp: Date.now() });
+    } catch {
+        res.status(404).json({ message: 'Not found', timestamp: Date.now() });
+    }
 });
 
 router.get('/gitlab/:query', async (req, res, next) => {
@@ -72,11 +73,10 @@ router.get('/gitlab/:query', async (req, res, next) => {
                 public_repos: numRepos
             };
         }
+        res.json({ user: output, timestamp: Date.now() });
     } catch {
-        // output['gitlab_user'] = {};
+        res.status(404).json({ message: 'Not found', timestamp: Date.now() });
     }
-
-    res.json({ user: output, timestamp: Date.now() });
 });
 
 router.get('/bitbucket/:query', async (req, res, next) => {
@@ -108,7 +108,9 @@ router.get('/bitbucket/:query', async (req, res, next) => {
                 created_at: created_on
             };
         }
-    } catch {}
+    } catch {
+        res.status(404).json({ message: 'Not found', timestamp: Date.now() });
+    }
     if (output) {
         try {
             response = await axios.get(repoUrl);
@@ -117,9 +119,9 @@ router.get('/bitbucket/:query', async (req, res, next) => {
         } catch {
             output['public_repos'] = 0;
         }
-    }
 
-    res.json({ user: output, timestamp: Date.now() });
+        res.json({ user: output, timestamp: Date.now() });
+    }
 });
 
 router.get('/:query', async (req, res, next) => {

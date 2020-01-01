@@ -6,20 +6,36 @@ const router = express.Router();
 
 router.get('/github/:username', async (req, res, next) => {
     const username = req.params.username;
-    let output = {
-        source: 'github',
-        login: username
-    };
+    let output;
 
     let response;
     try {
-        response = await axios.get(`https://api.github.com/users/${query}`);
-        if (response) {
-            console.log(response.data);
-        }
-    } catch {}
+        response = await axios.get(
+            `http://localhost:5000/api/search/github/${username}`
+        );
+        output = response.data.user;
+        output['repos'] = [];
 
-    res.json({ details: output, timestamp: Date.now() });
+        response = await axios.get(
+            `https://api.github.com/users/${username}/repos`
+        );
+        response.data.forEach(repo => {
+            output['repos'].push(
+                _.pick(repo, [
+                    'name',
+                    'html_url',
+                    'description',
+                    'created_at',
+                    'updated_at',
+                    'language',
+                    'forks_count'
+                ])
+            );
+        });
+        res.json({ details: output, timestamp: Date.now() });
+    } catch {
+        res.status(404).json({ message: 'Not Found', timestamp: Date.now() });
+    }
 });
 
 router.get('/gitlab/:username', async (req, res, next) => {});
