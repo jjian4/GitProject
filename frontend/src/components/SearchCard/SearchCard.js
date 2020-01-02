@@ -43,28 +43,31 @@ class SearchCard extends React.Component {
                 break;
         }
 
-        // props.user has the following keys: login, avatar_url, name, bio, created_at, public_repos
         return (
             <div className={`searchCard ${cardClass}`}>
-                <img
-                    className='avatar'
-                    src={this.props.user.avatar_url}
-                    alt='avatar'
-                />
-                <span className='name'>
-                    {this.props.user.name || this.props.user.login}
-                </span>
+                <Link
+                    to={`/details/${this.props.user.source}/${this.props.user.login}`}
+                >
+                    <img
+                        className='avatar'
+                        src={this.props.user.avatar_url}
+                        alt='avatar'
+                    />
+                    <span className='name'>
+                        {this.props.user.name || this.props.user.login}
+                    </span>
+                </Link>
                 {sourceIcon}
-                <div className='cardDetails'>
+                <div className='cardInfo'>
                     <div className='row'>
                         <div className='col-sm-6'>
-                            <span className='cardDetailsIcon'>
+                            <span className='cardInfoIcon' title='Username'>
                                 <FontAwesomeIcon icon={faUser} />
                             </span>
                             {this.props.user.login}
                         </div>
                         <div className='col-sm-6'>
-                            <span className='cardDetailsIcon'>
+                            <span className='cardInfoIcon' title='Date Created'>
                                 <FontAwesomeIcon icon={faCalendarAlt} />
                             </span>
                             {moment(this.props.user.created_at).format(

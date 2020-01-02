@@ -22,7 +22,7 @@ class RepoCard extends React.Component {
 
                 <div className='row'>
                     <div className='col-6'>
-                        <span className='repoDetailsIcon'>
+                        <span className='repoDetailsIcon' title='Date Created'>
                             <FontAwesomeIcon icon={faCalendarAlt} />
                         </span>
                         {moment(this.props.details.created_at).format(
@@ -30,7 +30,7 @@ class RepoCard extends React.Component {
                         )}
                     </div>
                     <div className='col-6'>
-                        <span className='repoDetailsIcon'>
+                        <span className='repoDetailsIcon' title='Latest Update'>
                             <FontAwesomeIcon icon={faEdit} />{' '}
                         </span>
                         {moment(this.props.details.updated_at).format(
@@ -42,17 +42,17 @@ class RepoCard extends React.Component {
                 <div>{this.props.details.description}</div>
 
                 <span>
-                    <span className='repoDetailsIcon'>
+                    <span className='repoDetailsIcon' title='Language'>
                         <FontAwesomeIcon icon={faCode} />
                     </span>
                     {this.props.details.language}
                 </span>
-                <span className='starsAndForks'>
+                <span className='starsAndForks' title='Stars'>
                     <span className='repoDetailsIcon'>
                         <Octicon icon={Star} />
                     </span>
                     {this.props.details.stargazers_count}
-                    <span className='repoDetailsIcon forksIcon'>
+                    <span className='repoDetailsIcon forksIcon' title='Forks'>
                         <Octicon icon={RepoForked} />
                     </span>
                     {this.props.details.forks_count}
