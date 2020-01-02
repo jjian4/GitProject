@@ -1,3 +1,32 @@
 .details {
     margin-top: var(--navBar-height);
 }
+
+.details .heading {
+    background-color: var(--smoke);
+    padding: 20px;
+    text-align: center;
+}
+
+.details .heading .avatar {
+    width: 20%;
+    min-width: 140px;
+    max-width: 180px;
+    height: auto;
+    border: 5px solid var(--primary);
+    border-radius: 100%;
+}
+
+.details .heading .name {
+    padding-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.details .heading .joinDate {
+    margin-right: 30px;
+}
+
+.details .heading .detailsIcon {
+    padding-right: 5px;
+}

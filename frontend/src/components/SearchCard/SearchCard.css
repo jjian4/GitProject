@@ -4,16 +4,16 @@
     margin: 15px auto;
 }
 
-.grayCard {
-    background-color: lightgray;
+.githubCard {
+    background-color: var(--github-theme);
 }
 
-.orangeCard {
-    background-color: lightsalmon;
+.gitlabCard {
+    background-color: var(--gitlab-theme);
 }
 
-.blueCard {
-    background-color: lightblue;
+.bitbucketCard {
+    background-color: var(--bitbucket-theme);
 }
 
 .searchCard .avatar {

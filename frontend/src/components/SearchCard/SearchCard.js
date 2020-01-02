@@ -16,7 +16,7 @@ class SearchCard extends React.Component {
         let sourceIcon;
         switch (this.props.user.source) {
             case 'github':
-                cardClass = 'grayCard';
+                cardClass = 'githubCard';
                 sourceIcon = (
                     <span className='source' title='Github'>
                         <FontAwesomeIcon icon={faGithub} />
@@ -24,7 +24,7 @@ class SearchCard extends React.Component {
                 );
                 break;
             case 'gitlab':
-                cardClass = 'orangeCard';
+                cardClass = 'gitlabCard';
                 sourceIcon = (
                     <span className='source' title='Gitlab'>
                         <FontAwesomeIcon icon={faGitlab} />
@@ -32,7 +32,7 @@ class SearchCard extends React.Component {
                 );
                 break;
             case 'bitbucket':
-                cardClass = 'blueCard';
+                cardClass = 'bitbucketCard';
                 sourceIcon = (
                     <span className='source' title='Bitbucket'>
                         <FontAwesomeIcon icon={faBitbucket} />

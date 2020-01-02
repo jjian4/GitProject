@@ -13,16 +13,11 @@
 }
 
 .repoCard .repoDetailsIcon {
-    padding-right: 3px;
+    padding-right: 5px;
 }
 
 .repoCard .starsAndForks {
     float: right;
-}
-
-.repoCard .starsAndForks .octicon {
-    width: 18px;
-    height: 18px;
 }
 
 .repoCard .forksIcon {

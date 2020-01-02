@@ -1,6 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Octicon, { Repo } from '@primer/octicons-react';
 import RepoCard from '../RepoCard/RepoCard';
 import './Details.css';
 
@@ -57,22 +61,71 @@ class Details extends React.Component {
 
         return (
             <div className='details'>
-                <div className='container'>
-                    <div>Source: {this.constants.source}</div>
-                    <div>Username: {this.constants.username}</div>
-                    {details && (
-                        <div>
-                            <img src={details.avatar_url} alt='avatar' />
-                            <div>Name: {details.name}</div>
-                            <div>Bio: {details.bio}</div>
-                            <a href={details.html_url}>Visit profile page</a>
-                            <div>Joined: {details.created_at}</div>
-                            <div>Number of repos: {details.public_repos}</div>
-                            <br />
-                            <div className='row'>{repos}</div>
+                {details && (
+                    <div>
+                        <div className='heading'>
+                            <div className='container'>
+                                <a
+                                    href={details.html_url}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <img
+                                        className='avatar'
+                                        src={details.avatar_url}
+                                        alt='avatar'
+                                    />
+                                    {/* Display either 'Username' or 'Name (username)' */}
+                                    <div className='name'>
+                                        {details.name || details.login}{' '}
+                                        {details.name && (
+                                            <span>({details.login})</span>
+                                        )}
+                                    </div>
+                                </a>
+                                <div>
+                                    <span className='joinDate'>
+                                        <span
+                                            className='detailsIcon'
+                                            title='Date Created'
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faCalendarAlt}
+                                            />
+                                        </span>
+                                        Joined{' '}
+                                        {moment(details.created_at).format(
+                                            'MMM DD, YYYY'
+                                        )}
+                                    </span>
+                                    <span>
+                                        <span
+                                            className='detailsIcon'
+                                            title='Number of Projects'
+                                        >
+                                            <Octicon icon={Repo} />
+                                        </span>
+                                        {details.public_repos} Projects
+                                    </span>
+                                </div>
+                                <div>
+                                    <b>Bio: </b>
+                                    {details.bio}
+                                </div>
+                            </div>
                         </div>
-                    )}
-                </div>
+
+                        <div className='container'>
+                            <div>
+                                <div>
+                                    Number of repos: {details.public_repos}
+                                </div>
+                                <br />
+                                <div className='row'>{repos}</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }

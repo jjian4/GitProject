@@ -1,10 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import {
-    faCalendarAlt,
-    faEdit,
-    faCode
-} from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Octicon, { Star, RepoForked } from '@primer/octicons-react';
 import './RepoCard.css';
@@ -23,7 +20,7 @@ class RepoCard extends React.Component {
                 <div className='row'>
                     <div className='col-6'>
                         <span className='repoDetailsIcon' title='Date Created'>
-                            <FontAwesomeIcon icon={faCalendarAlt} />
+                            <FontAwesomeIcon icon={faCalendar} />
                         </span>
                         {moment(this.props.details.created_at).format(
                             'MMM DD, YYYY'
@@ -31,7 +28,7 @@ class RepoCard extends React.Component {
                     </div>
                     <div className='col-6'>
                         <span className='repoDetailsIcon' title='Latest Update'>
-                            <FontAwesomeIcon icon={faEdit} />{' '}
+                            <FontAwesomeIcon icon={faEdit} />
                         </span>
                         {moment(this.props.details.updated_at).format(
                             'MMM DD, YYYY'

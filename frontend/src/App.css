@@ -3,6 +3,9 @@
     --primary: darkred;
     --smoke: #f5f5f5;
     --lightgray: lightgray;
+    --github-theme: lightgray;
+    --gitlab-theme: lightsalmon;
+    --bitbucket-theme: lightblue;
 }
 
 body {
@@ -13,6 +16,11 @@ body {
 a {
     color: inherit !important;
     text-decoration: none !important;
+}
+
+.octicon {
+    width: 18px;
+    height: 18px;
 }
 
 .navBar {
