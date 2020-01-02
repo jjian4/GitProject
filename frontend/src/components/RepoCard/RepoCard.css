@@ -1,0 +1,32 @@
+.repoCard {
+    display: block;
+    margin: 10px 0;
+    background-color: var(--smoke);
+    /* border: 1px solid black; */
+    box-shadow: 2px 4px var(--lightgray);
+    padding: 15px;
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.repoCard .repoName {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.repoCard .repoDetailsIcon {
+    padding-right: 3px;
+}
+
+.repoCard .starsAndForks {
+    float: right;
+}
+
+.repoCard .starsAndForks .octicon {
+    width: 18px;
+    height: 18px;
+}
+
+.repoCard .forksIcon {
+    padding-left: 10px;
+}

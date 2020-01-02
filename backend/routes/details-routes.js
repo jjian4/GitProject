@@ -28,6 +28,7 @@ router.get('/github/:username', async (req, res, next) => {
                     'created_at',
                     'updated_at',
                     'language',
+                    'stargazers_count',
                     'forks_count'
                 ])
             );

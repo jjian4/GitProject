@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import RepoCard from '../RepoCard/RepoCard';
 import './Details.css';
 
 class Details extends React.Component {
@@ -47,15 +48,8 @@ class Details extends React.Component {
             details = this.state.user.details;
             repos = details.repos.map((item, index) => {
                 return (
-                    <div key={index}>
-                        <div>Project: {item.name}</div>
-                        <a href={item.html_url}>Visit project</a>
-                        <div>Description: {item.description}</div>
-                        <div>Created: {item.created_at}</div>
-                        <div>Updated: {item.updated_at}</div>
-                        <div>Language: {item.language}</div>
-                        <div>Number of forks: {item.forks_count}</div>
-                        <hr />
+                    <div className='col-md-6' key={index}>
+                        <RepoCard details={item} />
                     </div>
                 );
             });
@@ -75,7 +69,7 @@ class Details extends React.Component {
                             <div>Joined: {details.created_at}</div>
                             <div>Number of repos: {details.public_repos}</div>
                             <br />
-                            <div>{repos}</div>
+                            <div className='row'>{repos}</div>
                         </div>
                     )}
                 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 import axios from 'axios';
-import SearchCard from './SearchCard';
+import SearchCard from '../SearchCard/SearchCard';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
