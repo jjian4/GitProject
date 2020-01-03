@@ -2,6 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+import {
+    faGithub,
+    faGitlab,
+    faBitbucket
+} from '@fortawesome/free-brands-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Octicon, { Repo } from '@primer/octicons-react';
@@ -48,6 +53,7 @@ class Details extends React.Component {
 
         let details;
         let repos;
+        let icon;
         if (this.state.user) {
             details = this.state.user.details;
             repos = details.repos.map((item, index) => {
@@ -57,6 +63,31 @@ class Details extends React.Component {
                     </div>
                 );
             });
+            switch (details.source) {
+                case 'github':
+                    icon = (
+                        <span className='sourceIcon'>
+                            <FontAwesomeIcon icon={faGithub} />
+                        </span>
+                    );
+                    break;
+                case 'gitlab':
+                    icon = (
+                        <span className='sourceIcon'>
+                            <FontAwesomeIcon icon={faGitlab} />
+                        </span>
+                    );
+                    break;
+                case 'bitbucket':
+                    icon = (
+                        <span className='sourceIcon'>
+                            <FontAwesomeIcon icon={faBitbucket} />
+                        </span>
+                    );
+                    break;
+                default:
+                    break;
+            }
         }
 
         return (
@@ -77,7 +108,7 @@ class Details extends React.Component {
                                     />
                                     {/* Display either 'Username' or 'Name (username)' */}
                                     <div className='name'>
-                                        {details.name || details.login}{' '}
+                                        {icon} {details.name || details.login}{' '}
                                         {details.name && (
                                             <span>({details.login})</span>
                                         )}
@@ -101,7 +132,7 @@ class Details extends React.Component {
                                     <span>
                                         <span
                                             className='detailsIcon'
-                                            title='Number of Projects'
+                                            title='Repositories'
                                         >
                                             <Octicon icon={Repo} />
                                         </span>
@@ -117,10 +148,7 @@ class Details extends React.Component {
 
                         <div className='container'>
                             <div>
-                                <div>
-                                    Number of repos: {details.public_repos}
-                                </div>
-                                <br />
+                                <div className='detailsSubtitle'>Projects</div>
                                 <div className='row'>{repos}</div>
                             </div>
                         </div>

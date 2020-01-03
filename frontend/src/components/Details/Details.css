@@ -17,6 +17,10 @@
     border-radius: 100%;
 }
 
+.details .heading .sourceIcon {
+    padding-right: 2px;
+}
+
 .details .heading .name {
     padding-top: 10px;
     font-size: 30px;
@@ -29,4 +33,10 @@
 
 .details .heading .detailsIcon {
     padding-right: 5px;
+}
+
+.details .detailsSubtitle {
+    padding-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
 }
