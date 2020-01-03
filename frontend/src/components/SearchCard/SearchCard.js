@@ -105,9 +105,7 @@ class SearchCard extends React.Component {
                     >
                         Visit
                     </a>
-                    <a className='cardButton customButton' href=':;javascript'>
-                        Follow
-                    </a>
+                    <button className='cardButton customButton'>Follow</button>
                 </div>
             </div>
         );

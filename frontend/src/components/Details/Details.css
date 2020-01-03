@@ -3,9 +3,20 @@
 }
 
 .details .heading {
-    background-color: var(--smoke);
     padding: 20px;
     text-align: center;
+}
+
+.details .githubHeading {
+    background-color: var(--github-theme);
+}
+
+.details .gitlabHeading {
+    background-color: var(--gitlab-theme);
+}
+
+.details .bitbucketHeading {
+    background-color: var(--bitbucket-theme);
 }
 
 .details .heading .avatar {

@@ -16,7 +16,9 @@ import './Details.css';
 class Details extends React.Component {
     constants = {
         source: this.props.location.pathname.split('/')[2],
-        username: this.props.location.pathname.split('/')[3]
+        username: this.props.location.pathname.split('/')[3],
+        // Number of repos to show when state.showMoreRepos is false
+        repoPreviewCount: 4
     };
 
     state = {
@@ -60,7 +62,8 @@ class Details extends React.Component {
 
         let details;
         let repos;
-        let icon;
+        let headingClass;
+        let sourceIcon;
         if (this.state.user) {
             details = this.state.user.details;
 
@@ -72,26 +75,29 @@ class Details extends React.Component {
                 );
             });
             if (!this.state.showMoreRepos) {
-                repos = repos.slice(0, 4);
+                repos = repos.slice(0, this.constants.repoPreviewCount);
             }
 
             switch (details.source) {
                 case 'github':
-                    icon = (
+                    headingClass = 'githubHeading';
+                    sourceIcon = (
                         <span className='sourceIcon'>
                             <FontAwesomeIcon icon={faGithub} />
                         </span>
                     );
                     break;
                 case 'gitlab':
-                    icon = (
+                    headingClass = 'gitlabHeading';
+                    sourceIcon = (
                         <span className='sourceIcon'>
                             <FontAwesomeIcon icon={faGitlab} />
                         </span>
                     );
                     break;
                 case 'bitbucket':
-                    icon = (
+                    headingClass = 'bitbucketHeading';
+                    sourceIcon = (
                         <span className='sourceIcon'>
                             <FontAwesomeIcon icon={faBitbucket} />
                         </span>
@@ -106,7 +112,7 @@ class Details extends React.Component {
             <div className='details'>
                 {details && (
                     <div>
-                        <div className='heading'>
+                        <div className={`heading ${headingClass}`}>
                             <div className='container'>
                                 <a
                                     href={details.html_url}
@@ -120,7 +126,8 @@ class Details extends React.Component {
                                     />
                                     {/* Display either 'Username' or 'Name (username)' */}
                                     <div className='name'>
-                                        {icon} {details.name || details.login}{' '}
+                                        {sourceIcon}{' '}
+                                        {details.name || details.login}{' '}
                                         {details.name && (
                                             <span>({details.login})</span>
                                         )}
@@ -148,7 +155,10 @@ class Details extends React.Component {
                                         >
                                             <Octicon icon={Repo} />
                                         </span>
-                                        {details.public_repos} Projects
+                                        {details.public_repos}{' '}
+                                        {details.public_repos === 1
+                                            ? 'Project'
+                                            : 'Projects'}
                                     </span>
                                 </div>
                                 {details.bio && (
@@ -164,18 +174,20 @@ class Details extends React.Component {
                             <div>
                                 <div className='detailsSubtitle'>Projects</div>
                                 <div className='row'>{repos}</div>
-                                <div className='moreProjectsButtonWrapper'>
-                                    <a
-                                        href=':;javascript'
-                                        className='moreProjectsButton customButton'
-                                        onClick={this.toggleMoreRepos}
-                                    >
-                                        Show{' '}
-                                        {this.state.showMoreRepos
-                                            ? 'Less'
-                                            : `More (${details.public_repos})`}
-                                    </a>
-                                </div>
+                                {details.public_repos >
+                                    this.constants.repoPreviewCount && (
+                                    <div className='moreProjectsButtonWrapper'>
+                                        <button
+                                            className='moreProjectsButton customButton'
+                                            onClick={this.toggleMoreRepos}
+                                        >
+                                            Show{' '}
+                                            {this.state.showMoreRepos
+                                                ? 'Less'
+                                                : `More (${details.public_repos})`}
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
