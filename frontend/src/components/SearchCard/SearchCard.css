@@ -52,9 +52,5 @@
 }
 
 .searchCard .cardButtons .cardButton {
-    border: 1px solid black;
-    border-radius: 5px;
     min-width: 25%;
-    padding: 3px 0;
-    text-align: center;
 }

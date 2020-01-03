@@ -1,5 +1,5 @@
 .details {
-    margin-top: var(--navBar-height);
+    margin: var(--navBar-height) 0;
 }
 
 .details .heading {
@@ -39,4 +39,9 @@
     padding-top: 10px;
     font-size: 30px;
     font-weight: bold;
+}
+
+.details .moreProjectsButtonWrapper {
+    padding-top: 15px;
+    text-align: center;
 }

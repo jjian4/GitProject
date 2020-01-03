@@ -33,6 +33,9 @@ router.get('/github/:username', async (req, res, next) => {
                 ])
             );
         });
+
+        output['repos'] = _.sortBy(output['repos'], 'updated_at').reverse();
+
         res.json({ details: output, timestamp: Date.now() });
     } catch {
         res.status(404).json({ message: 'Not Found', timestamp: Date.now() });

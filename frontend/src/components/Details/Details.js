@@ -21,7 +21,8 @@ class Details extends React.Component {
 
     state = {
         user: null,
-        userNotFound: false
+        userNotFound: false,
+        showMoreRepos: false
     };
 
     componentDidMount = () => {
@@ -42,6 +43,12 @@ class Details extends React.Component {
         }
     };
 
+    toggleMoreRepos = () => {
+        this.setState(prevState => {
+            return { showMoreRepos: !prevState.showMoreRepos };
+        });
+    };
+
     render() {
         // Redirect to home if no profile found
         if (this.state.userNotFound) {
@@ -56,6 +63,7 @@ class Details extends React.Component {
         let icon;
         if (this.state.user) {
             details = this.state.user.details;
+
             repos = details.repos.map((item, index) => {
                 return (
                     <div className='col-md-6' key={index}>
@@ -63,6 +71,10 @@ class Details extends React.Component {
                     </div>
                 );
             });
+            if (!this.state.showMoreRepos) {
+                repos = repos.slice(0, 4);
+            }
+
             switch (details.source) {
                 case 'github':
                     icon = (
@@ -139,10 +151,12 @@ class Details extends React.Component {
                                         {details.public_repos} Projects
                                     </span>
                                 </div>
-                                <div>
-                                    <b>Bio: </b>
-                                    {details.bio}
-                                </div>
+                                {details.bio && (
+                                    <div>
+                                        <b>Bio: </b>
+                                        {details.bio}
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -150,6 +164,18 @@ class Details extends React.Component {
                             <div>
                                 <div className='detailsSubtitle'>Projects</div>
                                 <div className='row'>{repos}</div>
+                                <div className='moreProjectsButtonWrapper'>
+                                    <a
+                                        href=':;javascript'
+                                        className='moreProjectsButton customButton'
+                                        onClick={this.toggleMoreRepos}
+                                    >
+                                        Show{' '}
+                                        {this.state.showMoreRepos
+                                            ? 'Less'
+                                            : `More (${details.public_repos})`}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

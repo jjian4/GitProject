@@ -36,24 +36,34 @@ class RepoCard extends React.Component {
                     </div>
                 </div>
 
-                <div>{this.props.details.description}</div>
+                {this.props.details.description &&
+                    this.props.details.description !== '' && (
+                        <div className='description'>
+                            {this.props.details.description}
+                        </div>
+                    )}
 
-                <span>
-                    <span className='repoDetailsIcon' title='Language'>
-                        <FontAwesomeIcon icon={faCode} />
+                <div className='bottomRow'>
+                    <span>
+                        <span className='repoDetailsIcon' title='Language'>
+                            <FontAwesomeIcon icon={faCode} />
+                        </span>
+                        {this.props.details.language || 'Unknown'}
                     </span>
-                    {this.props.details.language}
-                </span>
-                <span className='starsAndForks' title='Stars'>
-                    <span className='repoDetailsIcon'>
-                        <Octicon icon={Star} />
+                    <span className='starsAndForks' title='Stars'>
+                        <span className='repoDetailsIcon'>
+                            <Octicon icon={Star} />
+                        </span>
+                        {this.props.details.stargazers_count}
+                        <span
+                            className='repoDetailsIcon forksIcon'
+                            title='Forks'
+                        >
+                            <Octicon icon={RepoForked} />
+                        </span>
+                        {this.props.details.forks_count}
                     </span>
-                    {this.props.details.stargazers_count}
-                    <span className='repoDetailsIcon forksIcon' title='Forks'>
-                        <Octicon icon={RepoForked} />
-                    </span>
-                    {this.props.details.forks_count}
-                </span>
+                </div>
             </a>
         );
     }

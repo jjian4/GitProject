@@ -92,20 +92,20 @@ class SearchCard extends React.Component {
 
                 <div className='cardButtons'>
                     <Link
-                        className='cardButton'
+                        className='cardButton customButton'
                         to={`/details/${this.props.user.source}/${this.props.user.login}`}
                     >
                         Details
                     </Link>
                     <a
-                        className='cardButton'
+                        className='cardButton customButton'
                         href={this.props.user.html_url}
                         target='_blank'
                         rel='noopener noreferrer'
                     >
                         Visit
                     </a>
-                    <a className='cardButton' href=':;javascript'>
+                    <a className='cardButton customButton' href=':;javascript'>
                         Follow
                     </a>
                 </div>
