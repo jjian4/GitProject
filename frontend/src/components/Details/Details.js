@@ -28,6 +28,7 @@ class Details extends React.Component {
     };
 
     componentDidMount = () => {
+        document.title = `${this.constants.username} (${this.constants.source})`;
         this.fetchUserDetails();
     };
 
