@@ -104,6 +104,7 @@ router.get('/gitlab/:username', async (req, res, next) => {
         });
 
         output['repos'] = _.sortBy(output['repos'], 'updated_at').reverse();
+
         res.json({ details: output, timestamp: Date.now() });
     } catch {
         res.status(404).json({ message: 'Not Found', timestamp: Date.now() });
@@ -157,11 +158,7 @@ router.get('/bitbucket/:username', async (req, res, next) => {
                 created_at: created_on,
                 updated_at: updated_on
             });
-
-            console.log(output['repos']);
         });
-
-        console.log(output['repos']);
 
         const starsResponses = await Promise.all(starsPromises);
         starsResponses.forEach((starsResponse, index) => {
