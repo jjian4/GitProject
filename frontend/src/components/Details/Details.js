@@ -56,7 +56,7 @@ class Details extends React.Component {
         // Redirect to home if no profile found
         if (this.state.userNotFound) {
             alert(
-                `No ${this.constants.source} profile with username "${this.constants.username}" found.`
+                `Cannot find ${this.constants.source} profile with username "${this.constants.username}".`
             );
             return <Redirect to='/' />;
         }

@@ -36,12 +36,11 @@ class RepoCard extends React.Component {
                     </div>
                 </div>
 
-                {this.props.details.description &&
-                    this.props.details.description !== '' && (
-                        <div className='description'>
-                            {this.props.details.description}
-                        </div>
-                    )}
+                {this.props.details.description && (
+                    <div className='description'>
+                        {this.props.details.description}
+                    </div>
+                )}
 
                 <div className='bottomRow'>
                     <span>

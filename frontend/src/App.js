@@ -39,7 +39,10 @@ function App() {
                 <Route exact path='/' component={Home} />
                 <Route path='/details/github/:username' component={Details} />
                 <Route path='/details/gitlab/:username' component={Details} />
-
+                <Route
+                    path='/details/bitbucket/:username'
+                    component={Details}
+                />
                 <Route component={Home} />
             </Switch>
         </Router>
