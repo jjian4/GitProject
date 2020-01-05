@@ -83,27 +83,15 @@ class Details extends React.Component {
             switch (details.source) {
                 case 'github':
                     headingClass = 'githubHeading';
-                    sourceIcon = (
-                        <span className='sourceIcon'>
-                            <FontAwesomeIcon icon={faGithub} />
-                        </span>
-                    );
+                    sourceIcon = <FontAwesomeIcon icon={faGithub} />;
                     break;
                 case 'gitlab':
                     headingClass = 'gitlabHeading';
-                    sourceIcon = (
-                        <span className='sourceIcon'>
-                            <FontAwesomeIcon icon={faGitlab} />
-                        </span>
-                    );
+                    sourceIcon = <FontAwesomeIcon icon={faGitlab} />;
                     break;
                 case 'bitbucket':
                     headingClass = 'bitbucketHeading';
-                    sourceIcon = (
-                        <span className='sourceIcon'>
-                            <FontAwesomeIcon icon={faBitbucket} />
-                        </span>
-                    );
+                    sourceIcon = <FontAwesomeIcon icon={faBitbucket} />;
                     break;
                 default:
                     break;
@@ -128,7 +116,9 @@ class Details extends React.Component {
                                     />
                                     {/* Display either 'Username' or 'Name (username)' */}
                                     <div className='name'>
-                                        {sourceIcon}{' '}
+                                        <span className='sourceIcon'>
+                                            {sourceIcon}
+                                        </span>
                                         {details.name || details.login}{' '}
                                         {details.name && (
                                             <span>({details.login})</span>
@@ -175,96 +165,95 @@ class Details extends React.Component {
                         <div className='container'>
                             <div>
                                 <div className='row'>
-                                    <div className='col-md-6'>
-                                        <div className='detailsSubtitle'>
-                                            Languages
-                                        </div>
-                                        <Pie
-                                            data={{
-                                                datasets: [
-                                                    {
-                                                        data: [10, 20, 30],
-                                                        backgroundColor: [
-                                                            'rgba(255, 99, 132, 0.2)',
-                                                            'rgba(54, 162, 235, 0.2)',
-                                                            'rgba(255, 206, 86, 0.2)',
-                                                            'rgba(75, 192, 192, 0.2)',
-                                                            'rgba(153, 102, 255, 0.2)',
-                                                            'rgba(255, 159, 64, 0.2)'
-                                                        ]
-                                                    }
-                                                ],
-                                                labels: [
-                                                    'Red',
-                                                    'Yellow',
-                                                    'Blue'
-                                                ]
-                                            }}
-                                            options={{
-                                                legend: {
-                                                    position: 'bottom'
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                    <div className='col-md-6'>
-                                        <div className='detailsSubtitle'>
-                                            Recent Activity
-                                        </div>
-                                        <HorizontalBar
-                                            data={{
-                                                labels: [
-                                                    'Red',
-                                                    'Blue',
-                                                    'Yellow',
-                                                    'Green',
-                                                    'Purple',
-                                                    'Orange'
-                                                ],
-                                                datasets: [
-                                                    {
-                                                        label: '# of Votes',
-                                                        data: [
-                                                            12,
-                                                            19,
-                                                            3,
-                                                            5,
-                                                            2,
-                                                            3
-                                                        ],
-                                                        backgroundColor: [
-                                                            'rgba(255, 99, 132, 0.2)',
-                                                            'rgba(54, 162, 235, 0.2)',
-                                                            'rgba(255, 206, 86, 0.2)',
-                                                            'rgba(75, 192, 192, 0.2)',
-                                                            'rgba(153, 102, 255, 0.2)',
-                                                            'rgba(255, 159, 64, 0.2)'
-                                                        ],
-                                                        borderColor: [
-                                                            'rgba(255, 99, 132, 1)',
-                                                            'rgba(54, 162, 235, 1)',
-                                                            'rgba(255, 206, 86, 1)',
-                                                            'rgba(75, 192, 192, 1)',
-                                                            'rgba(153, 102, 255, 1)',
-                                                            'rgba(255, 159, 64, 1)'
-                                                        ],
-                                                        borderWidth: 1
-                                                    }
-                                                ]
-                                            }}
-                                            options={{
-                                                scales: {
-                                                    yAxes: [
+                                    {Object.entries(details.language_counts)
+                                        .length > 0 && (
+                                        <div className='col-md-6'>
+                                            <div className='detailsSubtitle'>
+                                                Languages
+                                            </div>
+                                            <Pie
+                                                data={{
+                                                    datasets: [
                                                         {
-                                                            ticks: {
-                                                                beginAtZero: true
-                                                            }
+                                                            data: Object.values(
+                                                                details.language_counts
+                                                            ),
+                                                            backgroundColor: [
+                                                                'rgba(255, 99, 132, 0.2)',
+                                                                'rgba(54, 162, 235, 0.2)',
+                                                                'rgba(255, 206, 86, 0.2)',
+                                                                'rgba(75, 192, 192, 0.2)',
+                                                                'rgba(153, 102, 255, 0.2)',
+                                                                'rgba(255, 159, 64, 0.2)'
+                                                            ]
+                                                        }
+                                                    ],
+                                                    labels: Object.keys(
+                                                        details.language_counts
+                                                    )
+                                                }}
+                                                options={{
+                                                    legend: {
+                                                        position: 'bottom'
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+
+                                    {Object.entries(details.event_counts)
+                                        .length > 0 && (
+                                        <div className='col-md-6'>
+                                            <div className='detailsSubtitle'>
+                                                Recent Activity
+                                            </div>
+                                            <HorizontalBar
+                                                data={{
+                                                    labels: Object.keys(
+                                                        details.event_counts
+                                                    ),
+                                                    datasets: [
+                                                        {
+                                                            label:
+                                                                '# of Events (Push, Merge, Issue, etc.)',
+                                                            data: Object.values(
+                                                                details.event_counts
+                                                            ),
+                                                            backgroundColor: [
+                                                                'rgba(255, 99, 132, 0.2)',
+                                                                'rgba(54, 162, 235, 0.2)',
+                                                                'rgba(255, 206, 86, 0.2)',
+                                                                'rgba(75, 192, 192, 0.2)',
+                                                                'rgba(153, 102, 255, 0.2)',
+                                                                'rgba(255, 159, 64, 0.2)'
+                                                            ],
+                                                            borderColor: [
+                                                                'rgba(255, 99, 132, 1)',
+                                                                'rgba(54, 162, 235, 1)',
+                                                                'rgba(255, 206, 86, 1)',
+                                                                'rgba(75, 192, 192, 1)',
+                                                                'rgba(153, 102, 255, 1)',
+                                                                'rgba(255, 159, 64, 1)'
+                                                            ],
+                                                            borderWidth: 1
                                                         }
                                                     ]
-                                                }
-                                            }}
-                                        />
-                                    </div>
+                                                }}
+                                                options={{
+                                                    scales: {
+                                                        xAxes: [
+                                                            {
+                                                                ticks: {
+                                                                    beginAtZero: true,
+                                                                    precision: 0 // Round to whole numbers
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <div>

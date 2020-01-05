@@ -3,7 +3,7 @@
     flex-direction: column;
     margin: 10px 0;
     background-color: var(--smoke);
-    box-shadow: 2px 4px var(--lightgray);
+    box-shadow: 2px 4px lightgray;
     padding: 15px;
     min-height: 90%;
 }

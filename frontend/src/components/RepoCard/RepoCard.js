@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { faEdit, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Octicon, { Star, RepoForked } from '@primer/octicons-react';
@@ -45,7 +45,7 @@ class RepoCard extends React.Component {
                 <div className='bottomRow'>
                     <span>
                         <span className='repoDetailsIcon' title='Language'>
-                            <FontAwesomeIcon icon={faCode} />
+                            <FontAwesomeIcon icon={faGlobe} />
                         </span>
                         {this.props.details.language || 'Unknown'}
                     </span>
