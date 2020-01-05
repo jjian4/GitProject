@@ -89,3 +89,18 @@ a {
     color: var(--primary) !important;
     font-weight: bolder;
 }
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 575px) {
+    body {
+        font-size: 16px;
+    }
+}

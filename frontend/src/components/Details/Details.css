@@ -38,7 +38,7 @@
     font-weight: bold;
 }
 
-.details .heading .joinDate {
+.details .heading .headingJoinDate {
     margin-right: 30px;
 }
 
@@ -55,4 +55,20 @@
 .details .moreProjectsButtonWrapper {
     padding-top: 15px;
     text-align: center;
+}
+
+@media (max-width: 575px) {
+    .details .heading .name {
+        font-size: 25px;
+    }
+
+    .details .heading .headingJoinDate,
+    .details .heading .headingRepoNum {
+        margin: 0;
+        display: block;
+    }
+
+    .details .detailsSubtitle {
+        font-size: 25px;
+    }
 }

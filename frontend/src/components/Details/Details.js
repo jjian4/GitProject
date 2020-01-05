@@ -11,6 +11,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Octicon, { Repo } from '@primer/octicons-react';
 import { Pie, HorizontalBar } from 'react-chartjs-2';
+import { backgroundColor, borderColor } from '../../static/chartColors';
 import RepoCard from '../RepoCard/RepoCard';
 import './Details.css';
 
@@ -126,7 +127,7 @@ class Details extends React.Component {
                                     </div>
                                 </a>
                                 <div>
-                                    <span className='joinDate'>
+                                    <span className='headingJoinDate'>
                                         <span
                                             className='detailsIcon'
                                             title='Date Created'
@@ -140,7 +141,7 @@ class Details extends React.Component {
                                             'MMM DD, YYYY'
                                         )}
                                     </span>
-                                    <span>
+                                    <span className='headingRepoNum'>
                                         <span
                                             className='detailsIcon'
                                             title='Repositories'
@@ -165,12 +166,12 @@ class Details extends React.Component {
                         <div className='container'>
                             <div>
                                 <div className='row'>
-                                    {Object.entries(details.language_counts)
-                                        .length > 0 && (
-                                        <div className='col-md-6'>
-                                            <div className='detailsSubtitle'>
-                                                Languages
-                                            </div>
+                                    <div className='col-md-6'>
+                                        <div className='detailsSubtitle'>
+                                            Languages
+                                        </div>
+                                        {Object.entries(details.language_counts)
+                                            .length > 0 ? (
                                             <Pie
                                                 data={{
                                                     datasets: [
@@ -178,14 +179,7 @@ class Details extends React.Component {
                                                             data: Object.values(
                                                                 details.language_counts
                                                             ),
-                                                            backgroundColor: [
-                                                                'rgba(255, 99, 132, 0.2)',
-                                                                'rgba(54, 162, 235, 0.2)',
-                                                                'rgba(255, 206, 86, 0.2)',
-                                                                'rgba(75, 192, 192, 0.2)',
-                                                                'rgba(153, 102, 255, 0.2)',
-                                                                'rgba(255, 159, 64, 0.2)'
-                                                            ]
+                                                            backgroundColor
                                                         }
                                                     ],
                                                     labels: Object.keys(
@@ -198,15 +192,17 @@ class Details extends React.Component {
                                                     }
                                                 }}
                                             />
-                                        </div>
-                                    )}
+                                        ) : (
+                                            <div>[No Languages Found]</div>
+                                        )}
+                                    </div>
 
-                                    {Object.entries(details.event_counts)
-                                        .length > 0 && (
-                                        <div className='col-md-6'>
-                                            <div className='detailsSubtitle'>
-                                                Recent Activity
-                                            </div>
+                                    <div className='col-md-6'>
+                                        <div className='detailsSubtitle'>
+                                            Recent Activity
+                                        </div>
+                                        {Object.entries(details.event_counts)
+                                            .length > 0 ? (
                                             <HorizontalBar
                                                 data={{
                                                     labels: Object.keys(
@@ -219,22 +215,8 @@ class Details extends React.Component {
                                                             data: Object.values(
                                                                 details.event_counts
                                                             ),
-                                                            backgroundColor: [
-                                                                'rgba(255, 99, 132, 0.2)',
-                                                                'rgba(54, 162, 235, 0.2)',
-                                                                'rgba(255, 206, 86, 0.2)',
-                                                                'rgba(75, 192, 192, 0.2)',
-                                                                'rgba(153, 102, 255, 0.2)',
-                                                                'rgba(255, 159, 64, 0.2)'
-                                                            ],
-                                                            borderColor: [
-                                                                'rgba(255, 99, 132, 1)',
-                                                                'rgba(54, 162, 235, 1)',
-                                                                'rgba(255, 206, 86, 1)',
-                                                                'rgba(75, 192, 192, 1)',
-                                                                'rgba(153, 102, 255, 1)',
-                                                                'rgba(255, 159, 64, 1)'
-                                                            ],
+                                                            backgroundColor,
+                                                            borderColor,
                                                             borderWidth: 1
                                                         }
                                                     ]
@@ -252,13 +234,21 @@ class Details extends React.Component {
                                                     }
                                                 }}
                                             />
-                                        </div>
-                                    )}
+                                        ) : (
+                                            <div>
+                                                [No Recent Public Activity]
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                             <div>
                                 <div className='detailsSubtitle'>Projects</div>
-                                <div className='row'>{repos}</div>
+                                {details.public_repos > 0 ? (
+                                    <div className='row'>{repos}</div>
+                                ) : (
+                                    <div>[No Public Projects]</div>
+                                )}
                                 {details.public_repos >
                                     this.constants.repoPreviewCount && (
                                     <div className='moreProjectsButtonWrapper'>
