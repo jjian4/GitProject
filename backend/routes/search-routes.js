@@ -103,7 +103,7 @@ router.get('/bitbucket/:query', async (req, res, next) => {
                 id: uuid,
                 login: nickname,
                 avatar_url: links.avatar.href,
-                html_url: links.html,
+                html_url: links.html.href,
                 name: display_name,
                 created_at: created_on
             };

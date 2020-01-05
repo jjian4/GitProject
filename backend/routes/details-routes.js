@@ -196,7 +196,8 @@ router.get('/bitbucket/:username', async (req, res, next) => {
                 html_url: links.html.href,
                 description,
                 created_at: created_on,
-                updated_at: updated_on
+                updated_at: updated_on,
+                language
             });
         });
 
