@@ -12,11 +12,9 @@ import './SearchCard.css';
 
 class SearchCard extends React.Component {
     render() {
-        let cardClass;
         let sourceIcon;
         switch (this.props.user.source) {
             case 'github':
-                cardClass = 'githubCard';
                 sourceIcon = (
                     <span className='source' title='Github'>
                         <FontAwesomeIcon icon={faGithub} />
@@ -24,7 +22,6 @@ class SearchCard extends React.Component {
                 );
                 break;
             case 'gitlab':
-                cardClass = 'gitlabCard';
                 sourceIcon = (
                     <span className='source' title='Gitlab'>
                         <FontAwesomeIcon icon={faGitlab} />
@@ -32,7 +29,6 @@ class SearchCard extends React.Component {
                 );
                 break;
             case 'bitbucket':
-                cardClass = 'bitbucketCard';
                 sourceIcon = (
                     <span className='source' title='Bitbucket'>
                         <FontAwesomeIcon icon={faBitbucket} />
@@ -44,7 +40,7 @@ class SearchCard extends React.Component {
         }
 
         return (
-            <div className={`searchCard ${cardClass}`}>
+            <div className={'searchCard'}>
                 <Link
                     to={`/details/${this.props.user.source}/${this.props.user.login}`}
                 >
@@ -81,12 +77,10 @@ class SearchCard extends React.Component {
                         </div>
                     )}
                     <div className='numRepositories'>
-                        <b>
-                            {this.props.user.public_repos}{' '}
-                            {this.props.user.public_repos === 1
-                                ? 'Project'
-                                : 'Projects'}
-                        </b>
+                        {this.props.user.public_repos}{' '}
+                        {this.props.user.public_repos === 1
+                            ? 'Project'
+                            : 'Projects'}
                     </div>
                 </div>
 

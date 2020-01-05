@@ -65,7 +65,6 @@ class Details extends React.Component {
 
         let details;
         let repos;
-        let headingClass;
         let sourceIcon;
         if (this.state.user) {
             details = this.state.user.details;
@@ -83,15 +82,12 @@ class Details extends React.Component {
 
             switch (details.source) {
                 case 'github':
-                    headingClass = 'githubHeading';
                     sourceIcon = <FontAwesomeIcon icon={faGithub} />;
                     break;
                 case 'gitlab':
-                    headingClass = 'gitlabHeading';
                     sourceIcon = <FontAwesomeIcon icon={faGitlab} />;
                     break;
                 case 'bitbucket':
-                    headingClass = 'bitbucketHeading';
                     sourceIcon = <FontAwesomeIcon icon={faBitbucket} />;
                     break;
                 default:
@@ -103,7 +99,7 @@ class Details extends React.Component {
             <div className='details'>
                 {details && (
                     <div>
-                        <div className={`heading ${headingClass}`}>
+                        <div className={'heading'}>
                             <div className='container'>
                                 <a
                                     href={details.html_url}
@@ -259,7 +255,7 @@ class Details extends React.Component {
                                             Show{' '}
                                             {this.state.showMoreRepos
                                                 ? 'Less'
-                                                : `More (${details.public_repos})`}
+                                                : `More (${details.repos.length})`}
                                         </button>
                                     </div>
                                 )}

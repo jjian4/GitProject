@@ -5,18 +5,7 @@
 .details .heading {
     padding: 20px;
     text-align: center;
-}
-
-.details .githubHeading {
-    background-color: var(--github-theme);
-}
-
-.details .gitlabHeading {
-    background-color: var(--gitlab-theme);
-}
-
-.details .bitbucketHeading {
-    background-color: var(--bitbucket-theme);
+    background-color: var(--grayBackground);
 }
 
 .details .heading .avatar {
@@ -29,7 +18,7 @@
 }
 
 .details .heading .sourceIcon {
-    padding-right: 8px;
+    padding-right: 10px;
 }
 
 .details .heading .name {
