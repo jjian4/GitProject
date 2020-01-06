@@ -160,6 +160,8 @@ router.get('/:query', async (req, res, next) => {
         }
     } catch {}
 
+    output = _.sortBy(output, ['public_repos', 'created_at']).reverse();
+
     res.json({ searchResults: output, timestamp: Date.now() });
 });
 

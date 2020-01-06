@@ -12,6 +12,10 @@ class Home extends React.Component {
         searchPending: false
     };
 
+    componentDidMount = () => {
+        document.title = 'GitTogether';
+    };
+
     fetchUsers = async () => {
         this.setState({ searchPending: true });
 
