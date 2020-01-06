@@ -43,11 +43,20 @@ class Home extends React.Component {
 
     handleSearchSubmit = event => {
         event.preventDefault();
+        const value = this.state.searchValue;
         // Avoid unecessary requests
+        if (this.state.prevValue === value || value === '') {
+            return;
+        }
+        // Don't allow spaces and other risky chars
         if (
-            this.state.prevValue === this.state.searchValue ||
-            this.state.searchValue === ''
+            value.includes(' ') ||
+            value.includes('/') ||
+            value.includes('\\') ||
+            value.includes('%') ||
+            value.includes('?')
         ) {
+            alert('Special characters not allowed in search.');
             return;
         }
         this.setState({ prevValue: this.state.searchValue });
@@ -55,18 +64,6 @@ class Home extends React.Component {
     };
 
     handleSearchEdit = event => {
-        // Don't allow spaces and other risky chars
-        const newChar = event.target.value.slice(-1);
-        if (
-            newChar === ' ' ||
-            newChar === '/' ||
-            newChar === ' \\' ||
-            newChar === '%' ||
-            newChar === '?'
-        ) {
-            return;
-        }
-
         this.setState({
             searchValue: event.target.value
         });
