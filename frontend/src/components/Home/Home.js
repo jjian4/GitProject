@@ -2,8 +2,7 @@ import React from 'react';
 import './Home.css';
 import axios from 'axios';
 import SearchCard from '../SearchCard/SearchCard';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Spinner from '../Spinner/Spinner';
 
 class Home extends React.Component {
     state = {
@@ -96,13 +95,7 @@ class Home extends React.Component {
                         />
                     </form>
 
-                    {this.state.searchPending && (
-                        <div className='spinnerWrapper'>
-                            <span className='searchSpinner'>
-                                <FontAwesomeIcon icon={faSpinner} />
-                            </span>
-                        </div>
-                    )}
+                    {this.state.searchPending && <Spinner />}
 
                     {!this.state.searchPending && !this.state.searchResults && (
                         <div className='about'>

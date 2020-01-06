@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Octicon, { Repo } from '@primer/octicons-react';
 import { Pie, HorizontalBar } from 'react-chartjs-2';
 import { backgroundColor, borderColor } from '../../static/chartColors';
+import Spinner from '../Spinner/Spinner';
 import RepoCard from '../RepoCard/RepoCard';
 import './Details.css';
 
@@ -25,6 +26,7 @@ class Details extends React.Component {
 
     state = {
         user: null,
+        detailsPending: false,
         userNotFound: false,
         showMoreRepos: false
     };
@@ -35,16 +37,19 @@ class Details extends React.Component {
     };
 
     fetchUserDetails = async () => {
+        this.setState({ detailsPending: true });
+
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/details/${this.constants.source}/${this.constants.username}`
             );
             this.setState({
-                user: response.data
+                user: response.data,
+                detailsPending: false
             });
         } catch (e) {
             console.log(e);
-            this.setState({ userNotFound: true });
+            this.setState({ userNotFound: true, detailsPending: false });
         }
     };
 
@@ -97,6 +102,7 @@ class Details extends React.Component {
 
         return (
             <div className='details'>
+                {this.state.detailsPending && <Spinner />}
                 {details && (
                     <div>
                         <div className={'heading'}>
