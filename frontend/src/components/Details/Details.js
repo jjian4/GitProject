@@ -117,8 +117,9 @@ class Details extends React.Component {
                                         src={details.avatar_url}
                                         alt='avatar'
                                     />
+                                    <br />
                                     {/* Display either 'Username' or 'Name (username)' */}
-                                    <div className='name'>
+                                    <span className='name'>
                                         <span className='sourceIcon'>
                                             {sourceIcon}
                                         </span>
@@ -126,7 +127,7 @@ class Details extends React.Component {
                                         {details.name && (
                                             <span>({details.login})</span>
                                         )}
-                                    </div>
+                                    </span>
                                 </a>
                                 <div>
                                     <span className='headingJoinDate'>
