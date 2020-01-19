@@ -2,18 +2,6 @@
     margin: var(--navBar-height) 0;
 }
 
-.home .homeTitle {
-    text-align: center;
-    color: var(--primary);
-    padding: 10px;
-    font-size: 40px;
-    font-weight: bold;
-}
-
-.home .homeTitle > span {
-    cursor: pointer;
-}
-
 .home .searchForm {
     text-align: center;
 }

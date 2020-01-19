@@ -1,0 +1,21 @@
+.auth {
+    margin: var(--navBar-height) 0;
+    text-align: center;
+}
+
+.auth .title {
+    padding-top: 10px;
+    font-size: 30px;
+}
+
+.auth .authForm input {
+    display: block;
+    min-width: 25%;
+    margin: 10px auto;
+}
+
+.auth .switchMode {
+    padding: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}

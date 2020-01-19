@@ -1,0 +1,11 @@
+.siteTitle {
+    text-align: center;
+    color: var(--primary);
+    padding: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.siteTitle > span {
+    cursor: pointer;
+}
