@@ -64,7 +64,7 @@ class App extends React.Component {
                                         <li className='navItem'>
                                             <NavLink
                                                 exact
-                                                to='/login'
+                                                to='/auth'
                                                 activeClassName='navItemActive'
                                             >
                                                 LOGIN

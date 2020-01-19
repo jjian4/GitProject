@@ -26,6 +26,14 @@ class Login extends React.Component {
 
     authSubmitHandler = async event => {
         event.preventDefault();
+        // Validate
+        if (this.state.formEmail.length === 0) {
+            alert('Email is required.');
+            return;
+        } else if (this.state.formPassword.length < 6) {
+            alert('Passeord must be at least 6 characters.');
+            return;
+        }
 
         const user = {
             email: this.state.formEmail,
@@ -34,7 +42,12 @@ class Login extends React.Component {
 
         // REGISTER
         if (this.state.registration) {
-            const newUser = { ...user, name: this.state.formName };
+            if (this.state.formName.length === 0) {
+                alert('Name is required.');
+                return;
+            }
+
+            const newUser = { name: this.state.formName, ...user };
             try {
                 const response = await axios.post(
                     'http://localhost:5000/api/user/register',
