@@ -4,15 +4,13 @@ import SiteTitle from '../SiteTitle/SiteTitle';
 import './Auth.css';
 import { AuthContext } from '../../context/authContext';
 
-class Login extends React.Component {
+class Auth extends React.Component {
     state = {
         registration: false,
         formName: '',
         formEmail: '',
         formPassword: ''
     };
-
-    static authContext = AuthContext;
 
     switchMode = () => {
         this.setState(prevState => ({
@@ -53,7 +51,8 @@ class Login extends React.Component {
                     'http://localhost:5000/api/user/register',
                     newUser
                 );
-                this.authContext.login(response.data.user.id);
+                console.log(`User id: ${response.data.user.id}`);
+                this.context.login(response.data.user.id);
             } catch (e) {
                 console.log(e);
             }
@@ -65,7 +64,8 @@ class Login extends React.Component {
                     'http://localhost:5000/api/user/login',
                     user
                 );
-                this.authContext.login(response.data.user.id);
+                console.log(`User id: ${response.data.user.id}`);
+                this.context.login(response.data.user.id);
             } catch (e) {
                 console.log(e);
             }
@@ -126,4 +126,6 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+Auth.contextType = AuthContext;
+
+export default Auth;
