@@ -37,7 +37,7 @@ class Login extends React.Component {
 
         const user = {
             email: this.state.formEmail,
-            password: this.state.password
+            password: this.state.formPassword
         };
 
         // REGISTER

@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
+const User = require('../models/user');
+const HttpError = require('../models/http-error.js');
 const _ = require('lodash');
 
 const router = express.Router();
@@ -29,11 +31,35 @@ router.post(
 
         const { name, email, password } = req.body;
 
-        // TODO
-        // Check if existing user with same email exists
-        // Setup DB and make User model (in separate file)
-        // Make new instance of User and save
-        // Return 201 and created user to frontend
+        let existingUser;
+        try {
+            existingUser = await User.findOne({ email: email });
+        } catch (err) {
+            return next(
+                new HttpError('Signing up failed, please try again later.', 500)
+            );
+        }
+        if (existingUser) {
+            return next(
+                new HttpError('User exists already, please login instead.', 422)
+            );
+        }
+
+        const createdUser = new User({
+            name,
+            email,
+            password
+        });
+
+        try {
+            await createdUser.save();
+        } catch (err) {
+            return next(
+                new HttpError('Signing up failed, please try again later.', 500)
+            );
+        }
+
+        res.status(201).json({ user: createdUser.toObject({ getters: true }) });
     }
 );
 
