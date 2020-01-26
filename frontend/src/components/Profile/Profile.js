@@ -10,7 +10,9 @@ import { AuthContext } from '../../context/authContext';
 // On backend, dont allow changes to a user that's not the current user
 class Profile extends React.Component {
     state = {
-        redirectToLogin: false
+        redirectToLogin: false,
+        name: null,
+        email: null
     };
 
     componentDidMount = () => {
@@ -31,11 +33,14 @@ class Profile extends React.Component {
             const { token, userId } = JSON.parse(
                 localStorage.getItem('userData')
             );
-            console.log(`Bearer ${token}`);
+
             const response = await axios.get(
                 `http://localhost:5000/api/user/${userId}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
+
+            const { name, email } = response.data;
+            this.setState({ name, email });
         } catch (e) {
             this.context.logout();
             this.setState({ redirectToLogin: true });
@@ -51,9 +56,9 @@ class Profile extends React.Component {
         return (
             <div className='profile'>
                 <div className='container'>
-                    <PageTitle text='Your name' />
-                    <div>{this.context.token}</div>
-                    <div>{this.context.userId}</div>
+                    <PageTitle text={this.state.name} />
+
+                    <div>{this.state.email}</div>
                 </div>
             </div>
         );

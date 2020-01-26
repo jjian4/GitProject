@@ -1,20 +1,24 @@
 const express = require('express');
-const axios = require('axios');
 const User = require('../models/user');
 const HttpError = require('../models/http-error.js');
 const authCheck = require('../middleware/auth-check');
-const _ = require('lodash');
 
 const router = express.Router();
 
-// router.use(authCheck);
-
 router.get('/:userId', authCheck, async (req, res, next) => {
-    // Will get info about logged in user
-    const userId = req.params.userId;
-    console.log(userId);
+    let existingUser;
+    try {
+        existingUser = await User.findOne({ _id: userId });
+        if (!existingUser) {
+            return next(new HttpError('Could not get user info 1.', 500));
+        }
+    } catch (e) {
+        return next(new HttpError('Could not get user info 2.', 500));
+    }
 
-    res.json({ userId: userId, timestamp: Date.now() });
+    const { name, email, password } = existingUser;
+
+    res.json({ name, email, password });
 });
 
 module.exports = router;

@@ -1,10 +1,8 @@
 const express = require('express');
-const axios = require('axios');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const HttpError = require('../models/http-error.js');
-const _ = require('lodash');
 
 const router = express.Router();
 
