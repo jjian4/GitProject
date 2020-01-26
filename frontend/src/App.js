@@ -80,7 +80,6 @@ class App extends React.Component {
         return (
             <AuthContext.Provider
                 value={{
-                    isLoggedIn: !!this.state.token,
                     token: this.state.token,
                     userId: this.state.userId,
                     login: this.login,

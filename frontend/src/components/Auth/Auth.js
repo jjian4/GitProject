@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import axios from 'axios';
 import PageTitle from '../PageTitle/PageTitle';
 import './Auth.css';
@@ -9,7 +10,8 @@ class Auth extends React.Component {
         registration: false,
         formName: '',
         formEmail: '',
-        formPassword: ''
+        formPassword: '',
+        redirectToProfile: false
     };
 
     switchMode = () => {
@@ -48,10 +50,13 @@ class Auth extends React.Component {
             const newUser = { name: this.state.formName, ...user };
             try {
                 const response = await axios.post(
-                    'http://localhost:5000/api/user/register',
+                    'http://localhost:5000/api/auth/register',
                     newUser
                 );
                 this.context.login(response.data.userId, response.data.token);
+                this.setState({
+                    redirectToProfile: true
+                });
             } catch (e) {
                 alert('Failed to register.');
                 console.log(e);
@@ -61,10 +66,13 @@ class Auth extends React.Component {
         else {
             try {
                 const response = await axios.post(
-                    'http://localhost:5000/api/user/login',
+                    'http://localhost:5000/api/auth/login',
                     user
                 );
                 this.context.login(response.data.userId, response.data.token);
+                this.setState({
+                    redirectToProfile: true
+                });
             } catch (e) {
                 alert('Failed to log in.');
                 console.log(e);
@@ -73,6 +81,9 @@ class Auth extends React.Component {
     };
 
     render() {
+        if (this.state.redirectToProfile) {
+            return <Redirect to='/profile' />;
+        }
         return (
             <div className='auth'>
                 <div className='container'>

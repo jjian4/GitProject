@@ -1,15 +1,16 @@
-const jwt = require('jwt');
+const jwt = require('jsonwebtoken');
 const HttpError = require('../models/http-error');
 
 module.exports = (req, res, next) => {
     if (req.methods == 'OPTIONS') {
         return next();
     }
+
     try {
         // Authorization Header: 'Bearer <Token>'
         const token = req.headers.authorization.split(' ')[1];
         if (!token) {
-            return next(new HttpError('Authentication failed', 401));
+            return next(new HttpError('Authentication failed 1', 401));
         }
 
         // Validates the token
@@ -18,6 +19,6 @@ module.exports = (req, res, next) => {
         req.userData = { userId: decodedToken.userId };
         next();
     } catch {
-        return next(new HttpError('Authentication failed', 401));
+        return next(new HttpError('Authentication failed 2', 401));
     }
 };
