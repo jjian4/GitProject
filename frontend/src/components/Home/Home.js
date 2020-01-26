@@ -3,7 +3,7 @@ import './Home.css';
 import axios from 'axios';
 import SearchCard from '../SearchCard/SearchCard';
 import Spinner from '../Spinner/Spinner';
-import SiteTitle from '../SiteTitle/SiteTitle';
+import PageTitle from '../PageTitle/PageTitle';
 
 class Home extends React.Component {
     state = {
@@ -81,7 +81,7 @@ class Home extends React.Component {
         return (
             <div className='home'>
                 <div className='container'>
-                    <SiteTitle onClick={this.clearSearch} />
+                    <PageTitle onClick={this.clearSearch} text='GitTogether' />
                     <form
                         className='searchForm'
                         onSubmit={this.handleSearchSubmit}

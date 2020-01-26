@@ -5,6 +5,7 @@ const userRoutes = require('./routes/user-routes');
 const searchRoutes = require('./routes/search-routes');
 const detailsRoutes = require('./routes/details-routes');
 const HttpError = require('./models/http-error.js');
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
     const error = new HttpError('Could not find this route.', 404);
     throw error;
 });
+
 mongoose
     .connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,

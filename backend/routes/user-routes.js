@@ -19,6 +19,7 @@ router.post('/login', async (req, res, next) => {
     // Check Email
     try {
         existingUser = await User.findOne({ email: email });
+        console.log('111');
     } catch (err) {
         return next(new HttpError('Logging in failed, please try again.', 500));
     }
@@ -31,6 +32,7 @@ router.post('/login', async (req, res, next) => {
     let passwordIsValid;
     try {
         passwordIsValid = await bcrypt.compare(password, existingUser.password);
+        console.log('222');
     } catch {
         return next(new HttpError('Logging in failed, please try again.', 500));
     }
@@ -44,6 +46,7 @@ router.post('/login', async (req, res, next) => {
         token = jwt.sign({ userId: existingUser.id }, process.env.JWT_KEY, {
             expiresIn: '1h'
         });
+        console.log('333');
     } catch {
         return next(new HttpError('Logging in failed, please try again.', 500));
     }

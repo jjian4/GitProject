@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import SiteTitle from '../SiteTitle/SiteTitle';
+import PageTitle from '../PageTitle/PageTitle';
 import './Auth.css';
 import { AuthContext } from '../../context/authContext';
 
@@ -51,9 +51,9 @@ class Auth extends React.Component {
                     'http://localhost:5000/api/user/register',
                     newUser
                 );
-                console.log(`User id: ${response.data.user.id}`);
-                this.context.login(response.data.user.id);
+                this.context.login(response.data.userId, response.data.token);
             } catch (e) {
+                alert('Failed to register.');
                 console.log(e);
             }
         }
@@ -64,9 +64,9 @@ class Auth extends React.Component {
                     'http://localhost:5000/api/user/login',
                     user
                 );
-                console.log(`User id: ${response.data.user.id}`);
-                this.context.login(response.data.user.id);
+                this.context.login(response.data.userId, response.data.token);
             } catch (e) {
+                alert('Failed to log in.');
                 console.log(e);
             }
         }
@@ -76,7 +76,7 @@ class Auth extends React.Component {
         return (
             <div className='auth'>
                 <div className='container'>
-                    <SiteTitle />
+                    <PageTitle text='GitTogether' />
                     <form
                         className='authForm'
                         onSubmit={this.authSubmitHandler}
