@@ -111,8 +111,8 @@ class Home extends React.Component {
                             </p>
                             <div>To complete before Spring 2020</div>
                             <ul>
-                                <li>Set up database</li>
-                                <li>Authentication</li>
+                                <li>Set up database (DONE!)</li>
+                                <li>Authentication (DONE!)</li>
                                 <li>
                                     Allow authenticated users to claim their own
                                     profiles and 'follow' other accounts
