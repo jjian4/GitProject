@@ -93,19 +93,29 @@ class App extends React.Component {
                                 <Link to='/'>GitTogether</Link>
                             </div>
                             <nav>
-                                <ul className='navBarRight'>
-                                    {this.state.token ? (
+                                {this.state.token ? (
+                                    <ul className='navBarRight'>
+                                        <li className='navItem'>
+                                            <NavLink
+                                                exact
+                                                to='/profile'
+                                                activeClassName='navItemActive'
+                                            >
+                                                PROFILE
+                                            </NavLink>
+                                        </li>
                                         <li className='navItem'>
                                             <NavLink
                                                 exact
                                                 onClick={this.logout}
                                                 to='/'
-                                                activeClassName='navItemActive'
                                             >
                                                 LOGOUT
                                             </NavLink>
                                         </li>
-                                    ) : (
+                                    </ul>
+                                ) : (
+                                    <ul className='navBarRight'>
                                         <li className='navItem'>
                                             <NavLink
                                                 exact
@@ -115,8 +125,8 @@ class App extends React.Component {
                                                 LOGIN
                                             </NavLink>
                                         </li>
-                                    )}
-                                </ul>
+                                    </ul>
+                                )}
                             </nav>
                         </div>
                     </div>

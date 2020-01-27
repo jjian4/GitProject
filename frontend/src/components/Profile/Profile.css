@@ -1,3 +1,25 @@
 .profile {
     margin: var(--navBar-height) 0;
+    text-align: center;
+}
+
+.profile .profileForm {
+    margin: 0px auto;
+}
+
+.profile .profileForm .svg-inline--fa {
+    width: 1em;
+}
+
+.profile .profileForm input {
+    /* display: block; */
+    min-width: 25%;
+    margin: 5px 10px;
+    padding: 4px 8px;
+    border: 1px solid var(--grayBackground);
+}
+
+.profile .profileForm .saveButton {
+    border: 1px solid black;
+    min-width: 10%;
 }

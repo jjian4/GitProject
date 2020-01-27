@@ -3,15 +3,11 @@
     text-align: center;
 }
 
-.auth .title {
-    padding-top: 10px;
-    font-size: 30px;
-}
-
 .auth .authForm input {
     display: block;
     min-width: 25%;
     margin: 10px auto;
+    padding: 4px 8px;
 }
 
 .auth .switchMode {
