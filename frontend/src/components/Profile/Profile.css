@@ -23,3 +23,14 @@
     border: 1px solid black;
     min-width: 10%;
 }
+
+.profile .followingTitle {
+    text-align: left;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.profile .followingList {
+    text-align: left;
+}

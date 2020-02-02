@@ -11,10 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PageTitle from '../PageTitle/PageTitle';
 import './Profile.css';
 import { AuthContext } from '../../context/authContext';
+import SearchCard from '../SearchCard/SearchCard';
 
-// TODO: UI of page
-// Fetch existing user data when component mounts (or redirect if unauthenticated)
-// On backend, dont allow changes to a user that's not the current user
 class Profile extends React.Component {
     state = {
         redirectToLogin: false,
@@ -158,6 +156,38 @@ class Profile extends React.Component {
                             />
                         )}
                     </form>
+
+                    <div className='followingTitle'>Following</div>
+                    <div className='followingList row'>
+                        <div className='col-md-6'>
+                            <SearchCard
+                                user={{
+                                    source: 'github',
+                                    login: 'login',
+                                    avatar_url: '#',
+                                    name: 'name',
+                                    created_at: Date.now(),
+                                    bio: 'bio',
+                                    public_repos: 0,
+                                    html_url: '#'
+                                }}
+                            />
+                        </div>
+                        <div className='col-md-6'>
+                            <SearchCard
+                                user={{
+                                    source: 'github',
+                                    login: 'login',
+                                    avatar_url: '#',
+                                    name: 'name',
+                                    created_at: Date.now(),
+                                    bio: 'bio',
+                                    public_repos: 0,
+                                    html_url: '#'
+                                }}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
