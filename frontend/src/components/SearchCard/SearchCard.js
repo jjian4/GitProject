@@ -7,10 +7,41 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 import moment from 'moment';
 import './SearchCard.css';
 
 class SearchCard extends React.Component {
+    state = {
+        isFollowed: false
+    };
+
+    componentDidMount() {
+        this.checkIfFollowing();
+    }
+
+    checkIfFollowing = async () => {
+        if (!localStorage.getItem('userData')) {
+            return;
+        }
+        const { token, userId } = JSON.parse(localStorage.getItem('userData'));
+
+        try {
+            const response = await axios.get(
+                `http://localhost:5000/api/user/${userId}/following/${this.props.user.source}/${this.props.user.login}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            this.setState({
+                isFollowed: response.data.isFollowed
+            });
+            console.log(response.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    toggleFollow = async () => {};
+
     render() {
         let sourceIcon;
         switch (this.props.user.source) {
@@ -99,7 +130,12 @@ class SearchCard extends React.Component {
                     >
                         Visit
                     </a>
-                    <button className='cardButton customButton'>Follow</button>
+                    <button
+                        className='cardButton customButton'
+                        onClick={this.toggleFollow}
+                    >
+                        {this.state.isFollowed ? 'Unfollow' : 'Follow'}
+                    </button>
                 </div>
             </div>
         );

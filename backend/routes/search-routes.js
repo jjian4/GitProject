@@ -13,7 +13,6 @@ router.get('/github/:query', async (req, res, next) => {
             `https://api.github.com/users/${query}`
         );
         if (response.data) {
-            // output['github_user'] = response.data;
             output = _.pick(response.data, [
                 'login',
                 'id',

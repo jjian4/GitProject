@@ -21,6 +21,7 @@ class Profile extends React.Component {
         githubUsername: '',
         gitlabUsername: '',
         bitbucketUsername: '',
+        following: [],
         formHasChanged: false
     };
 
@@ -98,6 +99,8 @@ class Profile extends React.Component {
         if (!localStorage.getItem('userData')) {
             return <Redirect to='/auth' />;
         }
+
+        console.log(this.state.following);
 
         return (
             <div className='profile'>

@@ -9,7 +9,8 @@ const userSchema = new Schema({
     password: { type: String, required: true, minlength: 6 },
     githubUsername: { type: String, default: '' },
     gitlabUsername: { type: String, default: '' },
-    bitbucketUsername: { type: String, default: '' }
+    bitbucketUsername: { type: String, default: '' },
+    following: { type: Array, default: [] }
 });
 
 userSchema.plugin(uniqueValidator);
