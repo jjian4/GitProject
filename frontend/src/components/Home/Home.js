@@ -104,10 +104,13 @@ class Home extends React.Component {
                                 discover and learn about developers on different
                                 version control platforms such as Github,
                                 Bitbucket, and Gitlab. After finding an account,
-                                the user can visit the developer's official
-                                profile or see a comprehensive summary, which
-                                includes recent activity, repository details,
-                                and programming language distributions.
+                                users can visit the developer's official profile
+                                or see a comprehensive summary, which includes
+                                recent activity, repository details, and
+                                programming language distributions.
+                                Authenticated users can claim their own profiles
+                                and "follow" others, which allows for easy
+                                access to account links and details.
                             </p>
                         </div>
                     )}
