@@ -109,16 +109,6 @@ class Home extends React.Component {
                                 includes recent activity, repository details,
                                 and programming language distributions.
                             </p>
-                            <div>To complete before Spring 2020</div>
-                            <ul>
-                                <li>Set up database (DONE!)</li>
-                                <li>Authentication (DONE!)</li>
-                                <li>
-                                    Allow authenticated users to claim their own
-                                    profiles and 'follow' other accounts
-                                </li>
-                                <li>Deployment</li>
-                            </ul>
                         </div>
                     )}
 

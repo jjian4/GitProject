@@ -161,32 +161,50 @@ class Profile extends React.Component {
                     </form>
 
                     <div className='followingTitle'>Following</div>
+                    {/* TODO: Replace hardcoded following list */}
                     <div className='followingList row'>
                         <div className='col-md-6'>
                             <SearchCard
                                 user={{
                                     source: 'github',
-                                    login: 'login',
-                                    avatar_url: '#',
-                                    name: 'name',
-                                    created_at: Date.now(),
-                                    bio: 'bio',
-                                    public_repos: 0,
-                                    html_url: '#'
+                                    login: 'shiyeli1999',
+                                    avatar_url:
+                                        'https://avatars0.githubusercontent.com/u/47112363?v=4',
+                                    name: null,
+                                    created_at: '2019-01-28T14:38:18Z',
+                                    bio: 'Doris Li',
+                                    public_repos: 6,
+                                    html_url: 'https://github.com/shiyeli1999'
                                 }}
                             />
                         </div>
                         <div className='col-md-6'>
                             <SearchCard
                                 user={{
-                                    source: 'github',
-                                    login: 'login',
-                                    avatar_url: '#',
-                                    name: 'name',
-                                    created_at: Date.now(),
-                                    bio: 'bio',
-                                    public_repos: 0,
-                                    html_url: '#'
+                                    source: 'gitlab',
+                                    login: 'karen',
+                                    avatar_url:
+                                        'https://secure.gravatar.com/avatar/8b82bce21ec5797488e720b8ed601159?s=80&d=identicon',
+                                    name: 'Karen Sijbrandij',
+                                    created_at: '2012-09-17T16:18:06.000Z',
+                                    public_repos: 4,
+                                    html_url: 'https://gitlab.com/karen'
+                                }}
+                            />
+                        </div>
+                        <div className='col-md-6'>
+                            <SearchCard
+                                user={{
+                                    source: 'bitbucket',
+                                    login: 'jonathanj',
+                                    avatar_url:
+                                        'https://secure.gravatar.com/avatar/eda8d3b94b8caa3d86d372854eadd696?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJJ-1.png',
+                                    name: 'Jonathan Jacobs',
+                                    created_at:
+                                        '2010-10-24T21:14:09.321664+00:00',
+                                    public_repos: 3,
+                                    html_url:
+                                        'https://bitbucket.org/%7B6a5e6060-d1fe-49c0-8abf-b187130d1f6f%7D/'
                                 }}
                             />
                         </div>
